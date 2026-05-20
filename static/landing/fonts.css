@@ -1,0 +1,181 @@
+/*-------- Lato ----------*/
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-Black.ttf') format('truetype');
+    font-weight: 900;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-BlackItalic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-BoldItalic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 700;
+}
+ 
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-Italic.ttf') format('truetype');
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto/Roboto-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+
+
+/*------- Playfair Display -------*/
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-BlackItalic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-Black.ttf') format('truetype');
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-ExtraBold.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-Italic.ttf') format('truetype');
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-MediumItalic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-SemiBoldItalic.ttf') format('truetype');
+    font-style: italic;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('assets/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+}
+

@@ -1,0 +1,264 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>КМУ 2026</title>
+
+    <link rel="stylesheet" href="{% static 'conference/declarations.css' %}?v={{ static_version }}"/>
+    <link rel="stylesheet" href="{% static 'conference/fonts.css' %}?v={{ static_version }}"/>
+
+    <link rel="stylesheet" href="{% static 'users/profile.css' %}?v={{ static_version }}"/>
+    <link rel="stylesheet" href="{% static 'users/profile_forms.css' %}?v={{ static_version }}"/>
+    <link rel="stylesheet" href="{% static 'users/input_dropdown.css' %}?v={{ static_version }}"/>
+    <link rel="stylesheet" href="{% static 'users/profile_dimensions.css' %}?v={{ static_version }}"/>
+    
+    <link rel="stylesheet" href="{% static 'conference/main.css' %}?v={{ static_version }}"/>
+    <link rel="stylesheet" href="{% static 'conference/footer.css' %}?v={{ static_version }}"/>
+    <link rel="stylesheet" href="{% static 'conference/dimensions.css' %}?v={{ static_version }}"/>
+
+    <link rel="icon" type="image/png" href="{% static 'conference/favicon/favicon.ico' %}?v={{ static_version }}"/>
+
+    {% block page_css %}{% endblock %}
+
+</head>
+<body>
+
+    <div id="page-container">
+
+
+        <div id="navigation-space">
+            
+            <div id="navigation-content">
+                    {% get_current_language as LANGUAGE_CODE %}
+                     
+                    <div id="profile-nav-logo">
+                        {% if LANGUAGE_CODE == 'ru' %}
+                        <img class="img-container" src="{% static 'conference/imgs/logo-site.svg' %}?v={{ static_version }}"/>
+                        {% else %}
+                        <img class="img-container" src="{% static 'conference/imgs/logo-site-en.svg' %}?v={{ static_version }}"/>
+                        {% endif %}
+                    </div>
+                    <div id="profile-nav-name">{% if LANGUAGE_CODE == 'ru' %}{{ request.user.profile_name_ru }}{% else %}{{ request.user.profile_name_en }}{% endif %}</div>
+                    <div id="profile-nav-logout" ><a href="{% url 'logout' %}">{% trans 'Выйти' %}</a></div>
+
+                    {% if request.user.is_org or request.user.is_admin  %}
+                        <a href="{% url 'participant_list' %}"><div class="dark-button">Панель администратора</div></a>
+                    {% endif %}
+
+                    <div class="profile-wl">&nbsp;</div>
+                    <div class="profile-nav-option po-js" data-go="personal-data" onclick="goTo(this);">{% translate 'Личные данные' %}</div>
+                    {% if flags.CONFERENCE %}
+                    <div class="profile-nav-option po-js" data-go="kmu" onclick="goTo(this);">{% trans 'КМУ 2027' %}</div>
+                    <div class="profile-sub-nav-option po-js" data-go="registration" onclick="goTo(this);">{% translate 'Регистрация' %}</div>
+                    <div id="profile-nav-reports" data-go="reports" onclick="goTo(this);" class="profile-sub-nav-option po-js" {% if request.user.has_profile and request.user.profile.is_registered %}{% else %} hidden {% endif %}>{% translate 'Мои доклады' %}</div>
+                    {% endif %}
+                    <div class="profile-nav-option po-js" data-go="archive" onclick="goTo(this);">{% translate 'Архив участий' %}</div>
+                    <div class="profile-nav-option po-js" data-go="contacts" onclick="goTo(this);">{% translate 'Контакты' %}</div>
+                    <div class="profile-wl">&nbsp;</div>
+                    <a href="{% url 'main_page_conference' %}"><div class="profile-nav-option">{% trans 'На главную КМУ' %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0z"/>
+                        </svg>
+                    </div></a>
+
+            </div>
+
+        </div>
+        <div id="page-space">
+            <div id="page-spacing">
+
+
+            <div id="profile-header">
+                <div id="profile-header-title">{% trans 'мой профиль' %}</div>
+                <div id="lang-menu">
+
+                    <div>
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        <form id="lang-form" action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <select id="lang-select" name="language" onchange="submitForm('lang-form');">
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %} class="lang-text">{{ language.code }}</option>
+                        {% endfor %}
+                        </select>
+                        </form>
+                    </div> 
+
+                    <div id="nav-burger">
+                        <div id="burger" onclick="dropdownVisibility('nav-dropdown-container');"><img src="{% static 'conference/assets/color-replaced.png' %}?v={{ static_version }}"/></div>
+                        <div id="nav-dropdown-container" hidden onclick="clickOff('nav-dropdown-container');">
+                        <div id="nav-dropdown">
+                            <div class="nav-option po-js" data-go="personal-data"  onclick="goTo(this);">{% translate 'Личные данные' %}</div>
+                            <div class="nav-option po-js" data-go="kmu"  onclick="goTo(this);">{% trans 'КМУ 2026' %}</div>
+                            
+                            <div class="nav-option po-js" data-go="archive"  onclick="goTo(this);">{% translate 'Архив участий' %}</div>
+                            <div class="nav-option po-js" data-go="contacts"  onclick="goTo(this);">{% translate 'Контакты' %}</div>
+                            <a href="{% url 'main_page_conference' %}" ><div class="nav-option nav-option-main">{% translate 'На главную КМУ' %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0z"/>
+                                </svg>
+                            </div></a>
+
+                        </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="personal-data" class="p-section-container">
+            <div class="p-section-title">{% trans 'личные данные' %}</div>
+            <div class="p-section-content">
+                <div id="profile-form-target" class="form-container"></div>
+            </div>
+            </div>
+                
+
+            {% if flags.CONFERENCE %}
+            <div class="p-section-title" id="kmu">{% trans 'КМУ 2027' %}</div>
+            
+            <div id="registration" class="p-section-container">
+            <div class="p-section-content">
+                <div class="p-sub-section-title">{% trans 'регистрация на конференцию' %}{% if flags.REGISTRATION %}{% else %} {% trans 'закрыта' %}{% endif %}</div>
+
+                <div id="participation-form-target" class="form-container"></div>
+            </div>
+            </div>
+    
+            
+            {% if sees_online %} 
+            <div id="conference-links" class="p-section-container">
+                <div class="p-section-content">
+                    <div class="p-sub-section-title">{% trans 'ссылки на онлайн-участие' %}</div>
+                    <div class="paragraph">{% trans "После перехода по ссылке Вам потребуется самостоятельно перейти в сессионный зал (Breakout room), соответствующий Вашей секции. Сделать это можно в разделе Дополнительно — Сессионные залы (More — Breakout rooms), см." %} <a target="_blank" class="conference-link" href="{% url 'get_to_zoom_room' %}">{% trans "инструкцию" %}</a>.</div>
+                    <div class="paragraph">{% trans "Ссылки на подключение к секциям" %} 24.04:</div>
+                    {% for osection in own_sections %}
+                        <div class="section-link-split">
+                        <div class="rh-status accepted"><div>{% trans "ваша секция" %}</div></div>
+                        {% if osection.conference_link %}
+                            <a class="conference-link" href="{{ osection.conference_link }}" target="_blank" rel="noopener" rel="noreferrer"><div class="">{% if LANGUAGE_CODE == 'ru' %}{{ osection.name_ru }}{% else %}{{ osection.name_en }}{% endif %}</div></a>
+                        {% else %}
+                            <!--div>{% if LANGUAGE_CODE == 'ru' %}{{ osection.name_ru }}{% else %}{{ osection.name_en }}{% endif %}</div-->
+                        {% endif %}
+                        
+                        </div>
+                    {% endfor %}
+
+                    {% for section in sections %}
+                        {% if section.conference_link %}
+                            <a class="conference-link" href="{{ section.conference_link }}" target="_blank" rel="noopener" rel="noreferrer"><div class="section-link">{% if LANGUAGE_CODE == 'ru' %}{{ section.name_ru }}{% else %}{{ section.name_en }}{% endif %}</div></a>
+                        {% else %}
+                            <!--div class="section-link">{% if LANGUAGE_CODE == 'ru' %}{{ section.name_ru }}{% else %}{{ section.name_en }}{% endif %}</div-->
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div id="reports" class="p-section-container" {% if request.user.has_profile and request.user.profile.is_registered %} {% else %} hidden {% endif %}>
+            <div class="p-section-content">
+                <div class="p-sub-section-title">{% trans 'мои доклады' %}</div>
+
+                <div id="reports-target" class=""></div> 
+            </div>
+            </div>
+            {% endif %}
+
+
+            <div id="archive" class="p-section-container">
+            <div class="p-section-title">{% trans 'архив участий' %}</div>
+            <div class="p-section-content">
+                {% if request.user.profile.reports.count == 0 %}
+                <div class="p-reg-text">{% trans 'Нет информации об участиях прошлых лет.' %}</div>
+                {% else %}
+                {% for report in request.user.profile.reports_over_years %}
+                    {% if flags.CONFERENCE and report.year == years.0 %}
+                    {% else %}
+                    <div class="archived-report">
+                        <div class="report-header">
+                            <div>{{ report.year }}</div>
+                            {% if report.status == "accepted" %}
+                                {% if report.plenary %}
+                                <div class="rh-status plenary"><div><img src="{% static 'conference/assets/accepted_check.svg' %}?v={{ static_version }}"></div><div>{% trans 'Пленарный' %}</div></div>
+                                {% else %}
+                                <div class="rh-status accepted"><div><img src="{% static 'conference/assets/accepted_check.svg' %}?v={{ static_version }}"></div><div>{% trans 'Принят' %}</div></div>
+                                {% endif %}
+                            {% elif report.status == "declined" %}
+                            <div class="rh-status declined"><div><img src="{% static 'conference/assets/declined.svg' %}?v={{ static_version }}"></div><div>{% trans 'Отклонен' %}</div></div>
+                            {% else %}
+                            <div class="rh-status in-review"><div><img src="{% static 'conference/assets/jam_search.svg' %}?v={{ static_version }}"></div><div>{% trans 'На рассмотрении' %}</div></div>
+                            {% endif %}
+                        </div>
+                        <div class="archived-report-title"><a href="{% url 'report_public_page' report.id  %}">{{ report.title }}</a></div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                {% endif %}
+            </div>
+            </div>
+
+
+            <div id="contacts" class="p-section-container">
+            <div class="p-section-title">{% trans 'контакты' %}</div>
+            <div class="p-section-content">
+                <div class="p-contacts-split">
+                    <div>
+                        <div class="p-contacts-label">E-mail</div>
+                        <div class="p-contacts-value">kmu@cosmos.ru</div>
+                    </div>
+                    <div>
+                        <div class="p-contacts-label">{% trans 'Адрес' %}</div>
+                        <div class="p-contacts-value">{% trans 'Москва, ул. Профсоюзная, д. 84/32, ИКИ РАН' %}</div>
+                    </div>
+                </div>
+                <div class="p-contacts-split second-row">
+                    <div>
+                        <div class="p-contacts-label">{% trans 'Сайт конференции' %}</div>
+                        <a href="https://kmu.cosmos.ru/"><div class="p-contacts-value">kmu.cosmos.ru</div></a>
+                    </div>
+                    <div>
+                        <div class="p-contacts-label">{% trans 'Сайт архива конференции' %}</div>
+                        <a href="https://kmu.archive.cosmos.ru/"><div class="p-contacts-value">kmu.archive.cosmos.ru</div></a>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+
+            </div>
+            {% include "conference/footer.html"  %}
+
+        </div>
+
+    </div>
+
+
+<script src="{% static 'htmx.min.js' %}?v={{ static_version }}"></script>
+<script src="{% static 'users/profile.js' %}?v={{ static_version }}"></script>
+<script src="{% static 'users/profile_forms.js' %}?v={{ static_version }}"></script>
+
+<script>
+    htmx.logAll();
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+        htmx.ajax('GET', "{%  url 'profile_endpoint' %}", { target: '#profile-form-target', swap: 'innerHTML', source: '#profile-form-target'});
+
+        htmx.ajax('GET', "{%  url 'participation_endpoint' %}", { target: '#participation-form-target', swap: 'innerHTML', source: '#participation-form-target'});
+
+        let reportsEl = document.getElementById("reports");
+        if (! reportsEl.hidden) {
+            console.log("FOUND");
+            htmx.ajax('GET', "{%  url 'reports_endpoint' %}", { target: '#reports-target', swap: 'innerHTML', source: '#reports-target'});
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

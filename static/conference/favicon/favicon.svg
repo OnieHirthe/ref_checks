@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32"><svg id="SvgjsSvg1001" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #fff8e7;
+      }
+
+      .cls-3 {
+        fill: #5039af;
+      }
+    </style>
+  </defs>
+  <circle class="cls-3" cx="16.04" cy="15.98" r="15.97"></circle>
+  <path class="cls-2" d="M1.1,10.17c.11-.28.22-.55.35-.81,3.8-2.85,8.94-3.72,13.68-1.85,7.26,2.86,10.83,11.07,7.97,18.33-.95,2.42-2.5,4.43-4.41,5.93-2.79.49-5.75.24-8.58-.88C1.9,27.65-2.13,18.38,1.1,10.17Z"></path>
+  <polygon class="cls-1" points="20.29 18.88 20.63 13.22 15.69 16 19.93 12.24 14.47 10.71 20.13 11.05 17.35 6.11 21.11 10.35 22.64 4.89 22.3 10.55 27.24 7.77 23 11.53 28.46 13.06 22.8 12.72 25.58 17.66 21.82 13.41 20.29 18.88"></polygon>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

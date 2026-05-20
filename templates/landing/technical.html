@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>КМУ 2026</title>
+    <link rel="stylesheet" href="{% static 'landing/declarations.css' %}">
+    <link rel="stylesheet" href="{% static 'landing/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'landing/main_page.css' %}">
+    <link rel="stylesheet" href="{% static 'landing/form.css' %}">
+    <link rel="stylesheet" href="{% static 'landing/dimensions.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'landing/sass_compiled/sky.css' %}">
+
+    <link rel="icon" type="image/png" href="{% static 'landing/favicon/favicon.ico' %}"/> 
+
+</head>
+<body>
+
+    <div id="m-nav-shade" hidden onclick="exceptChangeVisibility('m-nav-shade');"> 
+        <div id="m-nav-dropdown">
+            <div id="m-nav-logo"><img class="img-container" src="{% static 'landing/assets/icons/iki_medium.svg' %}"/></div>
+            <div id="m-nav-options">
+                <a href="{% url 'main_page' %}#section-2"><div>О конференции</div></a>
+                <a href="{% url 'main_page' %}#section-4"><div>Иностранным участникам</div></a>
+                <a href="{% url 'main_page' %}#section-5"><div>Контакты</div></a>
+                <div><a href="https://kmu.archive.cosmos.ru/previous/">
+                Архив
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0z"/>
+</svg>
+                </a></div>
+            </div>
+        </div>
+    </div>
+<div id="section-1-full">
+    <div id="section-1-background-full">
+        <img id="section-1d-img" class="img-container" src="{% static 'landing/assets/desktop/main_bg.png' %}"/>
+        <img id="section-1m-img" class="img-container" src="{% static 'landing/assets/mobile/bg_main.png' %}">
+    </div>
+    
+    {% include 'landing/stars.html' %}
+
+    <div id="navigation">
+        <div id="d-nav-container">
+            <div class="d-nav-push-item">
+                <img class="img-container" src="{% static 'landing/assets/icons/logo_iki.svg' %}"/>
+            </div>
+            <a href="{% url 'main_page' %}#section-2"><div class="d-nav-item">О конференции</div></a>
+            <a href="{% url 'main_page' %}#section-4"><div class="d-nav-item">Иностранным участникам</div></a>
+            <a href="{% url 'main_page' %}#section-5"><div class="d-nav-item">Контакты</div></a>
+            <div class="d-nav-item"><a href="https://kmu.archive.cosmos.ru/previous/">Архив <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0z"/>
+</svg></a></div>
+        </div>
+        <div id="m-nav-container">
+            <div class="m-nav-push-item">
+                <img class="img-container" src="{% static 'landing/assets/icons/logo_iki.svg' %}"/>
+            </div>
+            <div id="m-nav-menu" onclick="changeVisibility('m-nav-shade');">
+                <img class="img-container" src="{% static 'landing/assets/icons/codicon_menu.svg' %}"/>
+            </div> 
+        </div>
+    </div>
+
+    <div id="header" >
+        <div id="header-box">
+            <div id="header-box-dates">22–24 АПРЕЛЯ, 2026</div>
+            <div>ИКИ РАН, МОСКВА, РОССИЯ</div>
+        </div>
+
+        <div id="title">
+            МЕЖДУНАРОДНАЯ <span class="bold">КОНФЕРЕНЦИЯ МОЛОДЫХ УЧЁНЫХ</span> ПО&nbsp;КОСМИЧЕСКИМ ИССЛЕДОВАНИЯМ
+        </div>
+        <div id="title-mob">
+            <div>МЕЖДУНАРОДНАЯ</div>
+            <div class="title-mob-bold">КОНФЕРЕНЦИЯ</div>
+            <div class="title-mob-bold">МОЛОДЫХ УЧЁНЫХ</div>
+            <div>ПО&nbsp;КОСМИЧЕСКИМ</div>
+            <div>ИССЛЕДОВАНИЯМ</div>
+        </div>
+    </div>
+
+    <div id="unsub-div">
+        Вы успешно отписались от рассылки.
+    </div>
+
+</div>
+
+
+<script src="{% static 'htmx.min.js' %}"></script>
+
+<script>htmx.logAll();</script>
+<script src="{% static 'landing/main_page.js' %}"></script>
+<script src="{% static 'landing/form.js' %}"></script>
+
+</body>
+</html>

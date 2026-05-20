@@ -1,0 +1,36 @@
+{% load static %}
+
+    {% if instance %}
+    <form autocomplete="off" hx-post="{% url 'handle_bl_entry' instance.id %}" hx-trigger="click from:#bl-submit-button" >
+    {% else %}
+    <form autocomplete="off" hx-post="{% url 'handle_bl_entry' %}" hx-trigger="click from:#bl-submit-button" >
+    {% endif %}
+    <div class="">
+        {% csrf_token %}
+        <div class="field-container">
+            <div class="field-label">{{ form.level.label }}*</div>
+            <div class="">{{ form.level }}</div>
+            <div class="field-error">{{ form.level.errors.as_text }}</div>
+        </div>
+        <div class="field-container">
+            <div class="field-label">{{ form.comment.label }}*</div>
+            <div class="">{{ form.comment }}</div>
+            <div class="field-error">{{ form.comment.errors.as_text }}</div>
+        </div>
+        
+        <div class="field-container">
+
+            <div class="field-label">{{ form.user.label }}</div>
+
+            <input id="id_user-input" name="query" hx-get="{% url 'bl_user_endpoint' %}"  hx-trigger="keyup delay:400ms" hx-target="#inner-user" hx-swap="outerHTML" onclick="optionsVisibility();">
+
+
+            <div id="user-container" {% if form.user.initial %} hx-get="{% url 'bl_user_endpoint' %}?query={{form.user.initial  }}" {% else %} hx-get="{% url 'bl_user_endpoint' %}" {% endif %} hx-trigger="load" hx-swap="innerHTML"></div>
+            
+            <div class="field-error">{{ form.user.errors.as_text }}</div>
+        
+        </div>
+        
+        <div id="bl-submit-button" class="dark-button">сохранить</div>
+    </div>
+    </form>

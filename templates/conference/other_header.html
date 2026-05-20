@@ -1,0 +1,41 @@
+{% load i18n %}
+
+<div id="other-header-container">
+    {% include 'conference/stars.html' %}
+    <div id="other-header-title"> {{ page_title | safe }}</div>
+    {% if flags.CONFERENCE %}
+    <div class="ohds-evenly">
+        <div>
+            <div>{% trans "открытие регистрации:" %}</div>
+            <div class="other-header-date">{% trans "26 февраля 2027" %}</div>
+        </div>
+        <div class="wvl"></div>
+        <div>
+            <div>{% trans "последний день подачи доклада:" %}</div>
+            <div class="other-header-date">{% trans "30 марта" %}</div>
+        </div>
+        <div class="wvl"></div>
+        <div>
+            <div>{% trans "последний день регистрации:" %}</div>
+            <div class="other-header-date">{% trans "20 апреля" %}</div>
+        </div>
+        <div class="wvl"></div>
+        <div>
+            <div>{% trans "конференция:" %}</div>
+            <div class="other-header-date">{% trans "22-24 апреля" %}</div>
+        </div>
+    </div>
+    {% else %}
+    <div class="ohds-2">
+        <div>
+            <div>{% trans "следующая конференция" %}</div>
+            <div class="other-header-date">{% trans "апрель 2027" %}</div>
+        </div>
+        <div class="wvl"></div>
+        <div>
+            <div>{% trans "место проведения" %}</div>
+            <div class="other-header-date">{% trans "ИКИ РАН, Москва" %}</div>
+        </div>
+    </div>
+    {% endif %}
+</div>

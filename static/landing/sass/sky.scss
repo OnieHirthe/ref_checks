@@ -1,0 +1,47 @@
+.night-sky {
+  display: block;
+  position: absolute;
+  background: transparent;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.star {
+  width: 2px;
+  height: 2px;
+  background: #af99ff;
+  box-shadow: 0 0 3px #af99ff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+}
+
+@for $i from 1 through 200 {
+  $left: random(100);
+  $top: random(100);
+  $size: random(2)+1;
+  $animationDelay: ($top/$left);
+  $animationDuration: ($size/2);
+  .twinkle-star-#{$i} {
+    width: $size + px;
+    height: $size + px;
+    left: percentage($left/100);
+    top: percentage($top/100);
+    animation: twinkle #{$animationDuration}s alternate infinite;
+    animation-delay: $animationDelay+s;
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

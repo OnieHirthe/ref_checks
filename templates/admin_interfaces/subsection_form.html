@@ -1,0 +1,44 @@
+{% load static %}
+
+{% if form %}
+    {% if instance.id %} 
+    <form id="subsection-form-{{ form.instance.id }}" hx-post="{% url 'handle_subsection' section.id instance.id %}" hx-swap="outerHTML" hx-trigger="click from:#sub-submit-{{ form.instance.id }}" >
+    {% else %}
+    <form id="subsection-form-{{ form.instance.id }}" hx-post="{% url 'handle_subsection' section.id %}" hx-swap="outerHTML"  hx-trigger="click from:#sub-submit-{{ form.instance.id }}" >
+    {% endif %}
+    <div class="subsection-container split">
+        {% csrf_token %}
+        <div class="field-container">
+            <div class="field-label">{{ form.name_ru.label }}*</div>
+            <div class="">{{ form.name_ru }}</div>
+            <div class="field-error">{{ form.name_ru.errors.as_text }}</div>
+        </div>
+        <div class="field-container">
+            <div class="field-label">{{ form.name_en.label }}*</div>
+            <div class="">{{ form.name_en }}</div>
+            <div class="field-error">{{ form.name_en.errors.as_text }}</div>
+        </div>
+        
+        <div hidden>{{ form.section }}</div>
+        <div class="form-buttons">
+            <div id="sub-submit-{{ form.instance.id }}" class="dark-button">сохранить</div>
+            {% if instance.id %}
+                <div id="sub-cancel-{{ form.instance.id }}" class="dark-button" hx-get="{% url 'handle_subsection' section.id instance.id  %}" hx-target="#subsection-form-{{ form.instance.id }}" hx-swap="outerHTML" >отменить</div>
+            {% else %}
+                <div id="sub-cancel-{{ form.instance.id }}" class="dark-button" onclick="delElement('subsection-form-{{ form.instance.id }}');">отменить</div>
+            {% endif %}
+        </div>
+    </div>
+    </form>
+
+{% else %}
+    <div id="instance-container-{{ instance.id }}" class="split-middle subsection-container">
+        <div>
+            <div>{{ instance.name_ru }} ({{ instance.name_en }})</div>
+        </div>
+        <div class="split">
+            <div class="clickable-icon" hx-get="{% url 'handle_subsection_form' section.id instance.id %}" hx-target="#instance-container-{{ instance.id }}" hx-swap="outerHTML"><img src="{% static 'conference/assets/bx_edit.svg' %}?v={{ static_version }}"/></div>
+            <div class="clickable-icon" hx-get="{% url 'delete_subsection' instance.id  %}" hx-target="#instance-container-{{ instance.id }}" hx-swap="delete"><img src="{% static 'conference/assets/mingcute_delete-line.svg' %}?v={{ static_version }}"/></div>
+        </div>
+    </div>
+{% endif %}

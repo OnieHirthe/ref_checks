@@ -1,0 +1,10 @@
+
+<form hidden id="report-authors-attach" hx-post="{% url 'admin_report_attach_authors' report.id %}" hx-trigger="change from:#id_authors_field" hx-target="#report-authors-attach" hx-swap="outerHTML">
+    {% csrf_token %}
+    <div>{{ form.authors_field }}</div>
+    {% if changed %}
+    <script>
+    htmx.ajax('GET', "{% url 'report_chat' report.id %}", '#chat-target');
+    </script>
+    {% endif %}
+</form>

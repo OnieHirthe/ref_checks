@@ -1,0 +1,5 @@
+<form autocomplete="off" hx-post="{% url 'handle_section_broadcast' section.id  %}" hx-trigger="change from:#id_conference_link_{{ section.id }}" hx-swap="outerHTML" >
+    {% csrf_token %}
+    <div class="field-container">{{ form.conference_link }}</div>
+    <div class="field-error">{{ form.conference_link.errors.as_text }}</div>
+</form>

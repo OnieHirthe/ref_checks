@@ -1,0 +1,90 @@
+{% load static %}
+{% load i18n %}
+
+{% if author_instance %}
+
+<div id="author-{{ author_instance.id }}" class="author-saved" data-instance_id="{{ author_instance.id }}">
+
+<div class="author-container">
+    <div class="author-name">{{ author_instance.full_name }}</div>
+    <div class="author-split">
+        <div class="author-sub-split">
+            {% if author_instance.email %}
+            <div class="author-email">{{ author_instance.email }}</div>
+            <div class="author-vl">&nbsp;</div>
+            {% endif %}
+            <div>{{ author_instance.org }}</div>
+        </div>
+        <div class="author-sub-split">
+            <div id="author-confirm-{{ author_instance.id }}" class="confirm-shade" hidden >
+                <div class="confirm-container">
+                    <div class="confirm-prompt">{% trans "Удалить соавтора?" %}</div>
+                    <div class="confirm-split">
+                        <div class="confirm-option" onclick="delAuthor(this);" data-url="{% url 'delete_author' author_instance.id %}" data-target="#author-{{ author_instance.id }}" data-swap="delete">{% trans "да" %}</div>
+                        <div class="deny-option" onclick="hide('author-confirm-{{ author_instance.id }}');">{% trans "нет" %}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="author-icon" hx-get="{% url 'author_endpoint_form' author_instance.id %}" hx-target="#author-{{ author_instance.id }}" hx-swap="outerHTML"><img src="{% static 'conference/assets/bx_edit.svg' %}?v={{ static_version }}"/></div>
+            <div class="author-icon" onclick="show('author-confirm-{{ author_instance.id }}');"><img src="{% static 'conference/assets/mingcute_delete-line.svg' %}?v={{ static_version }}"/></div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+{% else %}
+<div id="author-{{ author_form.instance.id }}" class="author-thing">
+
+<form id="author-form-{{ author_form.instance.id }}" autocomplete="off" {% if author_form.instance.exists %} data-url="{% url 'author_endpoint' author_form.instance.id  %}" {% else %} data-url="{% url 'author_endpoint' %}" {% endif %} data-target="#author-{{ author_form.instance.id }}" data-swap="outerHTML">
+
+{% csrf_token %}
+
+<div class="fields-split">
+<div class="field-container">
+    <div class="field-label">{{ author_form.first_name.label }}*</div>
+    <div>{{ author_form.first_name }}</div>
+    <div class="field-error">{{ author_form.first_name.errors.as_text }}</div>
+</div>
+
+<div class="field-container">
+    <div class="field-label">{{ author_form.last_name.label }}*</div>
+    <div>{{ author_form.last_name }}</div>
+    <div class="field-error">{{ author_form.last_name.errors.as_text }}</div>
+</div>
+</div>
+
+
+<div class="fields-split reverse">
+<div class="field-container">
+    <div class="field-label">{{ author_form.email.label }}*</div>
+    <div>{{ author_form.email }}</div>
+    <div class="field-error">{{ author_form.email.errors.as_text }}</div>
+</div>
+
+<div class="field-container">
+    <div class="field-label">{{ author_form.middle_name.label }}</div>
+    <div>{{ author_form.middle_name }}</div>
+    <div class="field-error">{{ author_form.middle_name.errors.as_text }}</div>
+</div>
+</div>
+
+<div class="fields-split">
+<div class="field-container">
+    <div class="field-label">{{ author_form.org.label }}*</div>
+    <div>{{ author_form.org }}</div>
+    <div class="field-error">{{ author_form.org.errors.as_text }}</div>
+</div>
+</div>
+
+<div class="fields-split">
+    <div class="profile-smaller-button" onclick="saveAuthor(this);" data-form_id="author-form-{{ author_form.instance.id }}"   id="author-button-{{ author_form.instance.id }}">{% trans 'Сохранить' %}</div>
+
+    <div id="author-cancel-{{ author_form.instance.id }}"  class="profile-smaller-inactive-button" {% if author_form.instance.exists %} hx-get="{% url 'author_endpoint' author_form.instance.id %}" hx-target="#author-{{ author_form.instance.id }}" hx-swap="outerHTML" {% else %} onclick="removeEl('author-{{ author_form.instance.id }}');" {% endif %}>{% trans 'Отменить' %}</div>
+</div>
+
+</form>
+
+</div>
+
+{% endif %}
