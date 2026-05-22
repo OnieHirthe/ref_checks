@@ -1,0 +1,265 @@
+{% extends 'conference/base.html'  %}
+
+{% load static %}
+{% load i18n %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'conference/other_header.css' %}?v={{ static_version }}">
+    <link rel="stylesheet" href="{% static 'conference/participants.css' %}?v={{ static_version }}">
+    <link rel="stylesheet" href="{% static 'conference/sass_compiled/sky.css' %}?v={{ static_version }}">
+{% endblock %}
+
+{% block page %}
+
+{% include 'conference/other_header.html' %}
+
+<div class="section-container">
+    {% include 'conference/for_participants.html' %}
+</div>
+
+<div class="section-container">
+    <div class="section-title">{% trans "информация для иностранных участников" %}</div>
+
+    <div class="q-container">
+        <div class="question" data-answer="answer-1" data-icon="icon-1" onclick="showAnswer(this);">
+            <div id="icon-1"><img class="q-icon" src="{% static 'conference/assets/nav-down-arrow-dark.svg' %}?v={{ static_version }}"></div>
+            <div class="q-text">{% trans "Виза" %}</div>
+        </div>
+        <div class="answer answer-hidden" id="answer-1">
+            <div class="paragraph-b">
+            {% trans "Для уточнения визовых требований и подачи заявки обратитесь на" %} <span class="bold">{% trans "сайт посольства России в вашей стране" %}</span>. {% trans "Граждане ряда стран могут оформить однократную электронную визу (e-visa) по адресу:" %} <a class="medium-link" href="https://electronic-visa.kdmid.ru/index_en.html">https://electronic-visa.kdmid.ru/index_en.html</a>.
+            </div>
+            <div class="paragraph-b">
+            {% trans "Рекомендуем заблаговременно уточнить условия оформления, так как сроки и требования различаются в зависимости от гражданства." %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="q-container">
+        <div class="question" data-answer="answer-2" data-icon="icon-2" onclick="showAnswer(this);">
+            <div id="icon-2"><img class="q-icon" src="{% static 'conference/assets/nav-down-arrow-dark.svg' %}?v={{ static_version }}"></div>
+            <div class="q-text">{% trans "Перелет и проживание" %}</div>
+        </div>
+        <div class="answer answer-hidden" id="answer-2">
+            <div class="paragraph-b">
+                {% blocktrans %}Рекомендуем бронировать авиабилеты как можно раньше — ближе к датам конференции выбор рейсов может сократиться.{% endblocktrans %}
+                <br>
+                {% blocktrans %}Участники самостоятельно организуют проживание. Предлагаем рассмотреть следующие гостиницы в разных ценовых категориях:{% endblocktrans %}
+            </div>
+            <div class="paragraph-b">
+                <span class="bold">{% trans "Вблизи ИКИ РАН" %}</span> {% trans "(около 10 мин. на такси / 20 мин. на общественном транспорте):" %}
+            </div>
+            <ul class="paragraph-b"><li>
+                <a class="medium-link" href="https://www.zenhotels.com/hotel/russia/moscow/mid7835940/maleton_hotel/?dates=24.08.2025-30.08.2025&guests=1&price=one&q=2395&residency=en-ru&sid=1c1b36f4-d561-4112-b67b-41fb22e0d9ad">{% trans "Малетон на Гарибальди" %}</a> (3/5)
+            </li></ul>
+            <div class="paragraph-b">
+                <span class="bold">{% trans "Центр Москвы" %}</span> {% trans "(около 30 мин. на такси / 40 мин. на общественном транспорте):" %}
+            </div>
+            <ul class="paragraph-b">
+                <li><a class="medium-link" href="https://www.zenhotels.com/hotel/russia/moscow/mid7467290/president_3/?q=2395&dates=24.08.2025-30.08.2025&guests=1&residency=en-ru&sid=b3f36d9d-d07c-462c-bcc0-a451eb526afd&price=one">President Hotel</a> (4/5)</li>
+                <li><a class="medium-link" href="https://www.zenhotels.com/hotel/russia/moscow/mid7597068/park_inn_by_radisson_sadu/?dates=24.08.2025-30.08.2025&distance=3&guests=2&price=one&q=2395&stars=4.5&sid=aa3af0a5-90ed-4d6e-b15d-0a0b64f39bca">SADU Hotel</a> (4/5)</li>
+            </ul>
+            <div class="paragraph-b">
+                {% trans "Рекомендуем бронировать через" %} <span class="bold">zenhotels.com</span> — {% trans "сайт принимает иностранные банковские карты и предлагает широкий выбор московских отелей. По вопросам бронирования вы также можете обратиться к нам." %}
+            </div>
+            <div class="paragraph-b">
+                <span class="bold">{% trans "Важно" %}</span>: {% blocktrans %}Даже если бронирование было оформлено с помощью иностранной банковской карты, оплата проживания в отеле, как правило, должна производиться наличными. Рекомендуем уточнить условия оплаты при оформлении брони.{% endblocktrans %}
+            </div>
+            <div class="paragraph-b">
+                <span class="bold">{% trans "Внимание" %}</span>: {% trans "В центре Москвы (внутри Садового кольца) сигналы геолокации могут работать неточно. Рекомендуем пользоваться приложением" %} <span class="bold">{% trans "Яндекс Карты" %}</span> (<a class="medium-link" href="https://apps.apple.com/ru/app/yandex-maps-navigator/id313877526?l=en-GB">App Store</a> /
+                <a class="medium-link" href="https://play.google.com/store/apps/details?id=ru.yandex.yandexmaps&hl=en">Google Play</a> /
+                <a class="medium-link" href="https://appgallery.huawei.com/#/app/C101411413">AppGallery</a>).
+            </div>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <div class="question" data-answer="answer-3" data-icon="icon-3" onclick="showAnswer(this);">
+            <div id="icon-3"><img class="q-icon" src="{% static 'conference/assets/nav-down-arrow-dark.svg' %}?v={{ static_version }}"></div>
+            <div class="q-text">{% trans "Как добраться до Москвы" %}</div>
+        </div>
+        <div class="answer answer-hidden" id="answer-3">
+            <div class="paragraph-b">
+                {% trans "Москву обслуживают три крупных международных аэропорта:" %}
+            </div>
+            <ul>
+                <li><span class="bold">{% trans "Шереметьево (SVO)" %}</span> — {% trans "большинство дальнемагистральных и международных рейсов" %}</li>
+                <li><span class="bold">{% trans "Домодедово (DME)" %}</span> — {% trans "многие европейские и внутренние рейсы" %}</li>
+                <li><span class="bold">{% trans "Внуково (VKO)" %}</span> — {% trans "ряд европейских направлений и внутренние рейсы" %}</li>
+            </ul>
+            <div class="paragraph-b">
+                {% trans "Из каждого аэропорта можно добраться до города несколькими способами:" %}
+            </div>
+            <ul>
+                <li><span class="bold">{% trans "Такси:" %}</span> {% blocktrans %}воспользуйтесь приложением или стойкой Яндекс Go в аэропорту. Оплата наличными доступна как в приложении, так и на стойке.{% endblocktrans %}</li>
+                <li><span class="bold">{% trans "Аэроэкспресс:" %}</span> {% blocktrans %}все три аэропорта соединены с центральными железнодорожными вокзалами Москвы (Шереметьево — Белорусский, Домодедово — Павелецкий, Внуково — Киевский), откуда можно пересесть на метро. Билеты продаются в кассах и терминалах самообслуживания; сохраняйте билет до выхода через турникет.{% endblocktrans %}</li>
+                <li><span class="bold">{% trans "Метро и автобус:" %}</span> {% trans "из каждого аэропорта есть маршруты до ближайших станций метро." %}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="q-container">
+        <div class="question" data-answer="answer-4" data-icon="icon-4" onclick="showAnswer(this);">
+            <div id="icon-4"><img class="q-icon" src="{% static 'conference/assets/nav-down-arrow-dark.svg' %}?v={{ static_version }}"></div>
+            <div class="q-text">{% trans "SIM-карта" %}</div>
+        </div>
+        <div class="answer answer-hidden" id="answer-4">
+            <div class="paragraph-b">
+            {% trans "По действующему российскому законодательству" %} <span class="bold">{% trans "иностранные граждане не могут приобрести SIM-карту в России" %}</span>. {% trans "Рекомендуем до отъезда подключить международный роуминг у вашего мобильного оператора." %}
+            </div>
+            <div class="paragraph-b">
+            {% blocktrans %}На территории ИКИ РАН для всех зарегистрированных участников будет доступен бесплатный Wi-Fi. Важно: устройства Apple блокируются в сети Wi-Fi ИКИ РАН. Приносим извинения за неудобства.{% endblocktrans %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="q-container">
+        <div class="question" data-answer="answer-5" data-icon="icon-5" onclick="showAnswer(this);">
+            <div id="icon-5"><img class="q-icon" src="{% static 'conference/assets/nav-down-arrow-dark.svg' %}?v={{ static_version }}"></div>
+            <div class="q-text">{% trans "Оплата и наличные" %}</div>
+        </div>
+        <div class="answer answer-hidden" id="answer-5">
+            <div class="paragraph-b">
+            <span class="bold">{% trans "Настоятельно рекомендуем брать с собой наличные (российские рубли)" %}</span>.<br>
+            {% trans "Наличный расчёт — самый надёжный способ оплаты, принимается повсеместно." %}
+            </div>
+            <div class="paragraph-b">
+            {% blocktrans %}Обменять доллары США или евро можно в аэропорту или в обменных пунктах города. Советуем взять с собой достаточно иностранной валюты, чтобы покрыть расходы на всё время поездки.{% endblocktrans %}
+            </div>
+            <div class="paragraph-b">
+            {% trans "Иностранные банковские карты (Visa, Mastercard) в России, как правило," %} <span>{% trans "не работают" %}</span>.
+            </div>
+        </div>
+    </div>
+
+
+    <div class="q-container">
+        <div class="question" data-answer="answer-6" data-icon="icon-6" onclick="showAnswer(this);">
+            <div id="icon-6"><img class="q-icon" src="{% static 'conference/assets/nav-down-arrow-dark.svg' %}?v={{ static_version }}"></div>
+            <div class="q-text">{% trans "Электрические розетки" %}</div>
+        </div>
+        <div class="answer answer-hidden" id="answer-6">
+            <div class="paragraph-b">{% trans "В России используется напряжение" %} <span class="bold">220–230 В / 50 Гц</span>. {% trans "Розетки" %} <span class="bold">{% trans "типа C" %}</span> {% trans "(евровилка, два круглых штырька) и" %} <span>{% trans "типа F" %}</span> (Schuko). {% trans "Большинство европейских вилок подойдут без переходника." %}</div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="section-container">
+    <div class="purple">
+    <div class="section-title">{% trans "правила для всех участников кму" %}</div>
+    <ul>
+    <li class="paragraph-b">{% trans "Для допуска к участию в КМУ докладчики должны предоставить экспертное заключение" %}</li>
+    <li class="paragraph-b">{% trans "Доклады участников, не выступивших на конференции, не будут опубликованы в тезисах КМУ" %}</li>
+    <li class="paragraph-b">{% trans "Для очного участия в качестве слушателя необходимо зарегистрироваться на конференцию" %}</li>
+    </ul>
+    </div>
+</div>
+
+
+<div id="publication-rules" class="section-container">
+    <div class="section-title">{% trans "правила для авторов трудов кму" %}</div>
+
+    <div class="paragraph-b two-thirds">{% blocktrans %}Для публикации Вашей работы в Трудах конференции просим присылать Ваши работы, оформленные в соответствии с правилами на основе указанного ниже файла образца статьи, до 1 июня 2026 года по адресу{% endblocktrans %} <span class="medium-link">kmu@cosmos.ru</span></div>
+    <div class="paragraph-b two-thirds">{% trans "К публикации принимаются только статьи, подготовленные на основе докладов, опубликованных в сборнике тезисов конференции." %}</div>
+    <div class="paragraph-b two-thirds">{% blocktrans %}Статья должна быть набрана на русском или на английском языке в редакторе Microsoft Word (или конвертирована в Microsoft Word из других программ) и сохранена в форматах *.doc, *docx или *.rtf.{% endblocktrans %}</div>
+
+
+    <div id="rules-split">
+        <div>
+            <div class="rules-option rules-option-selected" data-id="rb-1" onclick="ruleBlockDisplay(this);" >{% trans "параметры и шрифт статьи" %}</div>
+            <div class="rules-option" data-id="rb-2" onclick="ruleBlockDisplay(this);">{% trans "структура статьи" %}</div>
+            <div class="rules-option" data-id="rb-3" onclick="ruleBlockDisplay(this);">{% trans "оформление статьи" %}</div>
+            <div class="rules-option" data-id="rb-4" onclick="ruleBlockDisplay(this);">{% trans "графический материал" %}</div>
+            <div class="rules-option" data-id="rb-5" onclick="ruleBlockDisplay(this);">{% trans "электронная версия статьи" %}</div>
+
+            <div id="rules-doc" class="rules-doc-split">
+                <div>
+                    <div class="rules-doc-img"> <img class="img-container" src="{% static 'conference/assets/doc_icon.svg' %}?v={{ static_version }}" /></div>
+                    <div class="rules-doc-text">{% trans "Файл образца статьи" %}</div>
+                    {% get_current_language as LANGUAGE_CODE %}
+                    <a {% if LANGUAGE_CODE == 'ru' %} href="{% url 'get_example_ru' %}" {% else %} href="{% url 'get_example_en' %}" {% endif %}><div class="rules-doc-button">{% trans "скачать" %}</div></a>
+                </div>
+                <div>
+                    <div class="rules-doc-img"> <img class="img-container" src="{% static 'conference/assets/pdf_icon.svg' %}?v={{ static_version }}" /></div>
+                    <div class="rules-doc-text">{% trans "Правила оформления статьи" %}</div>
+                    <a target="_blank" {% if LANGUAGE_CODE == 'ru' %} href="{% url 'get_guide_ru' %}" {% else %} href="{% url 'get_guide_en' %}" {%endif %}><div class="rules-doc-button">{% trans "скачать" %}</div></a>
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <div id="rb-1" class="rules-block">
+                <div class="rules-bold">{% trans "Размер бумаги:" %}</div>
+                <div>{% trans "А4, ориентация книжная" %}</div>
+                <div class="rules-bold rmt">{% trans "Поля:" %}</div>
+                <div>{% trans "Верхнее и нижнее по 2 см; левое 3 см; правое 1,5 см" %}</div>
+                <div class="rules-bold rmt">{% trans "Шрифт:" %}</div>
+                <div>{% trans "Times New Roman, 12 кегль, интервал одинарный." %}</div>
+                <div>{% trans "Каждый абзац начинается с красной строки, абзацный отступ 1,25; выравнивание по ширине." %}</div>
+                <div>{% trans "Переносы в словах не ставятся." %}</div>
+            </div>
+            <div id="rb-2" class="rules-block" hidden>
+                <ol>
+                    <li>{% trans "УДК (замените образец на свои коды)." %}</li>
+                    <li>{% trans "Заглавие статьи: строчными буквами, шрифт полужирный, выравнивание по центру." %}</li>
+                    <li>{% blocktrans %}Инициалы автора, затем фамилия; Шрифт курсив, выравнивание по центру. Если авторы из разных организаций, после фамилий ставятся цифры 1, 2, 3 в верхнем индексе.{% endblocktrans %}</li>
+                    <li>{% trans "Название организации(й) следует писать полностью и сокращённо (в скобках), город, страна, выравнивание по центру." %}</li>
+                    <li>{% trans "Аннотация; кегль 10." %}</li>
+                    <li>{% trans "Ключевые слова; кегль 10." %}</li>
+                    <li>{% trans "Сведения об авторах: ФИО каждого автора (полностью), должность, степень, звание, e-mail, кегль 10." %}</li>
+                </ol>
+            </div>
+            <div id="rb-3" class="rules-block" hidden>
+                <div><span class="rules-bold">{% trans "Заголовок 1-го уровня:" %}</span> {% trans "строчными буквами, шрифт полужирный, выравнивание по центру." %}</div>
+                <div class="rmt"><span class="rules-bold">{% trans "Заголовок 2-го уровня:" %}</span> {% trans "строчными буквами, шрифт полужирный курсив, выравнивание по центру." %}</div>
+                <div class="rmt"><span class="rules-bold">{% trans "Заголовок 3-го уровня:" %}</span> {% trans "строчными буквами, шрифт курсив, выравнивание по центру." %}</div>
+                <div class="rmt">{% trans "Каждый рисунок помещается в отдельный абзац, в следующем абзаце — подрисуночная подпись. Ссылки в тексте на каждый рисунок и таблицу обязательны." %}</div>
+                <div class="rmt"><span class="rules-bold">{% trans "Формулы" %}</span> {% blocktrans %}создаются средствами формульного редактора MathType (или встроенного в Microsoft Word) с использованием стандартных настроек. Следите за раскладкой клавиатуры: латинские символы не должны заменяться похожими по начертанию кириллическими, а греческие — латинскими; проверяйте расположение индексов и подындексов.{% endblocktrans %}</div>
+                <div class="rmt"><span class="rules-bold">{% trans "Литература" %}</span> {% blocktrans %}приводится в конце статьи в алфавитном порядке фамилий авторов (сначала на русском языке, потом на иностранном) и не нумеруется. Фамилии, названия статей, книг и журналов приводятся на языке оригинала без сокращений. В тексте ссылки делаются на фамилии авторов с годом: (Виноградов и др., 1977а, 1979; Дегтярев, 2005; Watson et al., 1988).{% endblocktrans %}</div>
+            </div>
+            <div id="rb-4" class="rules-block" hidden>
+                <div>{% trans "Фотографии, графики, схемы и т. п. необходимо предоставить" %} <span class="rules-bold">{% trans "ОТДЕЛЬНЫМИ" %}</span> {% trans "графическими файлами." %}</div>
+                <div>{% trans "Все надписи на рисунках должны быть на русском языке." %}</div>
+                <div>{% trans "На графиках все оси должны иметь названия и размерности." %}</div>
+                <div class="rules-bold rmt">{% trans "Требования к файлам:" %}</div>
+                <ul>
+                    <li class="rmt"><span class="rules-bold">{% trans "Растровые" %}</span> {% trans "(фотографии, космические снимки, скриншоты цветные и черно-белые) должны иметь разрешение не менее 300 dpi (*.tif, *.psd, *.bmp, *.jpg, *.png);" %}</li>
+                    <li class="rmt"><span class="rules-bold">{% trans "Векторные" %}</span> {% blocktrans %}(графики, схемы), выполненные в программах типа Grafer, Statistica, MathLab, Excel и др. (*.ai, *.eps, *.wmf, *.emf, *.pdf), сохраняйте (команда Save as) или экспортируйте (команда Export) в векторный формат. Если программа не позволяет использовать кириллицу, необходим перевод всех иностранных надписей на русский язык в подписи к рисунку.{% endblocktrans %}</li>
+                </ul>
+            </div>
+            <div id="rb-5" class="rules-block" hidden>
+                <div>{% trans "Называть файл со статьёй необходимо по фамилии первого автора на русском языке" %} (<span class="rules-bold">{% trans "Иванов.doc" %}</span>).</div>
+                <div class="rmt">{% trans "Файлы с рисунками называть: фамилия первого автора_рис_номер" %} (<span class="rules-bold">{% trans "Иванов_рис_1.tif, Иванов_рис_2.eps" %}</span>)</div>
+                <div class="rmt">{% trans "PDF-файл полностью собранной статьи (с иллюстрациями и подрисуночными подписями)." %}</div>
+                <div class="rmt"><span class="rules-bold">{% trans "Правка вёрстки" %}</span> {% trans "вносится в присланный pdf-файл комментариями в программе AcrobatReader." %}</div>
+                <div class="rmt"><span class="rules-bold">{% trans "Экспертное заключение" %}</span> {% blocktrans %}на опубликование статьи в сборнике или разрешение от руководителя организации (на бланке, с подписью и печатью) на проведение экспертизы в ИКИ РАН, если работа выполнена в соавторстве с сотрудниками ИКИ РАН.{% endblocktrans %}</div>
+                <div class="rules-bold rmt">{% trans "ЭКСПЕРТНОЕ ЗАКЛЮЧЕНИЕ ДЛЯ ПУБЛИКАЦИИ РАБОТЫ ОБЯЗАТЕЛЬНО!" %}</div>
+            </div>
+
+        </div>
+    </div>
+
+
+            <div id="rules-doc-mob" class="rules-doc-split">
+                <div>
+                    <div class="rules-doc-img"> <img class="img-container" src="{% static 'conference/assets/doc_icon.svg' %}?v={{ static_version }}" /></div>
+                    <div class="rules-doc-text">{% trans "Файл образца статьи" %}</div>
+                    {% get_current_language as LANGUAGE_CODE %}
+                      <a {% if LANGUAGE_CODE == 'ru' %} href="{% url 'get_example_ru' %}" {% else %} href="{% url 'get_example_en' %}" {% endif %}><div class="rules-doc-button">{% trans "скачать" %}</div></a>
+                </div>
+                <div>
+                    <div class="rules-doc-img"> <img class="img-container" src="{% static 'conference/assets/pdf_icon.svg' %}?v={{ static_version }}" /></div>
+                    <div class="rules-doc-text">{% trans "Правила оформления статьи" %}</div>
+                    <a target="_blank" {% if LANGUAGE_CODE == 'ru' %} href="{% url 'get_guide_ru' %}" {% else %} href="{% url 'get_guide_en' %}" {%endif %}><div class="rules-doc-button">{% trans "скачать" %}</div></a>
+                </div>
+            </div>
+</div>
+
+{% include "conference/contacts.html"  %}
+
+{% endblock %}

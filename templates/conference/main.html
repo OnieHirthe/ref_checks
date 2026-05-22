@@ -1,0 +1,118 @@
+{% extends 'conference/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block page_css %}
+
+<link rel="stylesheet" href="{% static 'conference/main.css' %}?v={{ static_version }}">
+<!--link rel="stylesheet" href="{% static 'conference/main_dimensions.css' %}?v={{ static_version }}"-->
+<link rel="stylesheet" href="{% static 'conference/about.css' %}?v={{ static_version }}">
+<link rel="stylesheet" href="{% static 'conference/participants.css' %}?v={{ static_version }}">
+<link rel="stylesheet" href="{% static 'conference/sass_compiled/sky.css' %}?v={{ static_version }}">
+
+{% endblock %}
+
+{% block page %}
+
+
+
+<div id="header-section">
+
+    <div id="header-section-img">
+        {% include 'conference/stars.html' %}
+        <img id="img-bkg-full" class="img-container" src="{% static 'conference/imgs/bkg_planet_new.png' %}?v={{ static_version }}"/>
+    </div>
+
+    <div id="header">
+
+        <div id="header-text">
+            <div id="header-title">
+            {% trans "международная" %} <span class="bold">{% trans "конференция молодых учёных" %}</span> {% trans "по космическим исследованиям" %}
+            </div>
+           
+            {% if flags.REGISTRATION %} 
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'profile' %}#registration"><div class="take-part-button">{% trans "принять участие" %}</div></a>
+            {% else %}
+            <div class="take-part-button" onclick="show('entrance-shade');">{% trans "принять участие" %}</div>
+            {% endif %}
+            {% endif %}
+        </div>
+
+        <div id="header-box">
+            <div class="header-label-top">{% trans "следующая конференция" %}</div>
+            <div class="big-date bold">{% trans "АПРЕЛЬ 2027" %}</div>
+            <div class="big-date bold">{% trans "ИКИ РАН, Москва, Россия" %}</div>
+            {% if flags.CONFERENCE %}
+            <div class="separator">&nbsp;</div>
+            <div class="header-label">{% trans "открытие регистрации" %}</div>
+            <div class="header-date">{% trans "26 февраля" %}</div>
+            <div class="header-label">{% trans "последний день подачи доклада" %}</div>
+            <div class="header-date">{% trans "30 марта" %}</div>
+            <div class="header-label">{% trans "последний день регистрации" %}</div>
+            <div class="header-date">{% trans "20 апреля" %}</div>
+            {% else %}
+            <div class="separator">&nbsp;</div>
+            <div class="header-label">{% trans "зарегистрируйтесь на сайте, чтобы получать информационную рассылку кму" %}</div>
+            {% endif %}
+        </div>  
+
+    </div>
+
+
+
+</div>
+<div id="about-conference" class="section-container">
+
+    <div class="section-title">{% trans "о конференции" %}</div>
+
+    {% include 'conference/about_conference.html' %}
+
+    <div class="more-button-container">
+        <a href="{% url 'about_conference'%}"><div class="more-button">{% trans "подробнее" %}</div></a>
+    </div>
+
+
+</div>
+
+
+<div id="for-participants" class="section-container">
+    <div class="section-title">{% trans "участникам" %}</div>
+
+    {% include 'conference/for_participants.html' %}
+
+    <div class="more-button-container">
+        <a href="{% url 'for_participants'%}"><div class="more-button">{% trans "подробнее" %}</div></a>
+    </div>
+
+</div>
+
+<div id="about-iki" class="section-container">
+    <div class="section-title">{% trans "об ики ран" %}</div>
+
+    <div class="iki-split">
+        <div>
+            <img id="iki_bigger" class="img-container" src="{% static 'conference/imgs/iki_grain.png' %}?v={{ static_version }}" />
+            <img id="iki_smaller" class="img-container" src="{% static 'conference/imgs/iki_smaller.png' %}?v={{ static_version }}" />
+        </div>
+        <div>
+            <div class="paragraph-b"><a target="_blank" href="https://iki.cosmos.ru/" class="medium-link">{% trans "Институт космических исследований Российской академии наук (ИКИ РАН)" %}</a> {% trans "— головной академический институт по исследованию и использованию космического пространства в интересах фундаментальных наук." %}</div>
+            <div class="paragraph-b">{% blocktrans %}Миссия ИКИ — познание природы, освоение космоса, содействие техническому прогрессу, развитию человека и общества. ИКИ выполняет экспериментальные научные работы по следующим направлениям:{% endblocktrans %}</div>
+            <div class="paragraph-b"><ul>
+                <li>{% trans "астрономия и астрофизика" %}</li>
+                <li>{% trans "физика солнечной системы" %}</li>
+                <li>{% trans "физика космической плазмы" %}</li>
+                <li>{% trans "геофизика и дистанционное зондирование Земли" %}</li>
+                <li>{% trans "приборостроение" %}</li>
+                <li>{% trans "механика и информатика" %}</li>
+            </ul></div>
+        </div>
+    </div>
+
+
+</div>
+
+{% include "conference/contacts.html"  %}
+
+{% endblock %}

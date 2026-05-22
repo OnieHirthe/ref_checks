@@ -1,0 +1,22 @@
+{% if form %}
+
+<form  hx-post="{% url 'report_attach_section' report.id %}" hx-trigger="click from:#submit-section" hx-target="#report-section" hx-swap="innerHTML">
+    {% csrf_token %}
+    {{ form }}
+    <div class="split">
+        <p class="form-button" id="submit-section">сохранить</p>
+        <p class="form-button-light" hx-get="{% url 'report_attach_section' report.id %}" hx-trigger="click" hx-target="#report-section" hx-swap="innerHTML" >отменить</p>
+    </div>
+</div>
+</form>
+{% else %}
+<div class="field-value"> {{ report.section.name_ru }}</div>
+
+{% if changed %}
+<script>
+    htmx.ajax('GET', "{% url 'report_chat' report.id %}", '#chat-target');
+    htmx.ajax('GET', "{% url 'report_attach_subsection' report.id %}", '#report-subsection');
+</script>
+{% endif %}
+{% endif %}
+

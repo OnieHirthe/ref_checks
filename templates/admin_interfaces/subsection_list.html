@@ -1,0 +1,23 @@
+{% extends 'admin_interfaces/section_base.html' %}
+
+{% load static %}
+
+{% block subpage %}
+
+    <div class="page-title">Подсекции</div>
+   
+    <div>
+    {% for section in sections %}
+    <div class="section-title">{{ section.name_ru }} ({{ section.name_en }})</div>
+    <div id="sub-container-{{ section.id }}" class="sub-container">
+    {% for subsection in section.ordered_subsections %}
+        <div hx-get="{% url 'handle_subsection' section.id subsection.id %}" hx-trigger="load"></div>
+    {% endfor %}
+    </div>
+    {% if section.name_en == 'Plenary talks' %}{% else %}
+    <div class="section-button" hx-get="{% url 'handle_subsection_form' section.id %}" hx-target="#sub-container-{{ section.id }}" hx-swap="beforeend">Новая подсекция</div>
+    {% endif %}
+    {% endfor %}
+    </div>
+    
+{% endblock %}

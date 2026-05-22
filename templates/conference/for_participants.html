@@ -1,0 +1,45 @@
+{% load static %}
+{% load i18n %}
+
+<div class="section-content">
+<div class="paragraph">{% trans "Ниже представлены варианты участия в конференции КМУ 2027:" %}</div>
+<div class="participants-split-1">
+    <div><img class="img-container ps-icon" src="{% static 'conference/assets/quill_warning-alt.svg' %}?v={{ static_version }}" /></div>
+    <div>{% blocktrans %}Формат участия в конференции выбирается в личном кабинете после открытия регистрации на конференцию{% endblocktrans %}</div>
+</div>
+<div class="participants-split-2">
+    <div>
+        <div class="sub-title">{% trans "очно" %}</div>
+        <div class="paragraph">{% blocktrans %}Конференция проходит в Институте космических исследований РАН для всех зарегистрированных участников с очной формой участия. Призываем участвовать в КМУ очно — так вы сможете получить от конференции максимум пользы.{% endblocktrans %}</div>
+        <div class="paragraph">{% trans "Проход в институт для участников конференции будет через подъезд А-4." %}</div>
+        <div class="paragraph">{% trans "Для сотрудников ИКИ очный формат участия является обязательным." %}</div>
+        <div id="passport-accent" class="paragraph">{% trans "Для очного участия необходимо иметь при себе документ, удостоверяющий личность (паспорт)" %}</div>
+    </div>
+    <div>
+        <div class="sub-title">{% trans "онлайн" %}</div>
+        <div class="paragraph">{% blocktrans %}Если очное участие невозможно, сделать доклад и задать вопросы другим докладчикам можно будет удалённо через систему видеоконференцсвязи (ВКС). Инструкции будут опубликованы в личном кабинете участника.{% endblocktrans %}</div>
+        <div class="paragraph">{% blocktrans %}Также будут доступны ссылки на трансляцию КМУ и записи выступлений (регистрация на конференцию не требуется).{% endblocktrans %}</div>
+    </div>
+</div>
+  <!-- Этот блок нужно скрыть -->
+    <!--div class="gray-container">
+        <div>{% trans "важные даты" %}</div>
+        <div class="participants-split-3">
+            <div>
+                <div class="participants-date ">{% trans "открытие регистрации" %}</div>
+                <div class="date-label">{% trans "26 февраля" %}</div>
+            </div>
+            <div class="vl"></div>
+            <div>
+                <div class="participants-date ">{% trans "последний день подачи доклада" %}</div>
+                <div class="date-label">{% trans "30 марта" %}</div>
+            </div>
+            <div class="vl"></div>
+            <div>
+                <div class="participants-date ">{% trans "последний день регистрации" %}</div>
+                <div class="date-label">{% trans "20 апреля" %}</div>
+            </div>
+        </div>
+    </div-->
+
+</div>

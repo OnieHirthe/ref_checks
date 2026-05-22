@@ -1,0 +1,285 @@
+{% extends 'conference/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'conference/other_header.css' %}?v={{ static_version }}">
+    <link rel="stylesheet" href="{% static 'conference/about.css' %}?v={{ static_version }}">
+    <link rel="stylesheet" href="{% static 'conference/sass_compiled/sky.css' %}?v={{ static_version }}">
+{% endblock %}
+
+{% block page %}
+
+{% include 'conference/other_header.html' %}
+
+<div class="section-container">
+   {% include 'conference/about_conference.html' %}
+</div>
+
+
+<div class="section-container">
+    <div class="section-title">{% trans "основная информация" %}</div>
+
+    <div class="sub-title">{% trans "XXIV Конференция молодых учёных по космическим исследованиям" %}</div>
+
+    <div class="paragraph-b">{% blocktrans %}Приглашаем студентов, аспирантов и молодых учёных принять участие в XXIV Конференции молодых учёных (КМУ), которая пройдёт в Институте космических исследований Российской академии наук (ИКИ) в апреле 2027 года.{% endblocktrans %}</div>
+
+    <div id="format-img"><img class="img-container" src="{% static 'conference/imgs/conf_hall.png' %}?v={{ static_version }}" /></div>
+
+    <div id="format-container">
+        <div class="sub-title">{% trans "Формат конференции" %}</div>
+        <div id="format-split">
+            <div class="paragraph-b">{% blocktrans %}Конференция будет проводиться в очном и дистанционном форматах. Мы рекомендуем принимать участие очно — так вы сможете получить от КМУ максимум пользы.{% endblocktrans %}</div>
+            <div class="paragraph-b">{% blocktrans %}Программа конференции включает в себя устные, приглашенные и пленарные доклады, которые будут представлены на различных тематических секциях.{% endblocktrans %}</div>
+        </div>
+    </div>
+
+
+    <div class="subsection-title">{% trans "Цель конференции" %}</div>
+    <div id="goal-split">
+        <div><ul>
+            <li class="paragraph-b">{% trans "Предоставление молодым ученым возможности самостоятельно представить результаты своей научной работы." %}</li>
+            <li class="paragraph-b">{% trans "Развитие навыков публичных выступлений и обсуждения научных результатов перед аудиторией." %}</li>
+        </ul></div>
+        <div><ul>
+            <li class="paragraph-b">{% trans "Содействие обмену знаниями и опытом между молодыми исследователями и более старшими коллегами." %}</li>
+            <li class="paragraph-b">{% trans "Поддержка междисциплинарных исследований и интеграция знаний из различных областей науки." %}</li>
+        </ul></div>
+    </div>
+
+</div>
+
+
+<div class="section-container gray">
+
+    <div class="subsection-title">{% trans "Тематические секции" %}</div>
+    <div class="paragraph-b two-thirds">{% trans "На конференции будут работать следующие секции, каждая из которых посвящена актуальной области космических исследований:" %}</div>
+
+
+    <div class="theme-split">
+            <div class="theme-container">
+            <div id="theme-1" class=" theme-container-partial">
+                <div class="dark-subsection-title">{% trans "Физика Солнечной системы" %}</div>
+                <div class="paragraph">{% trans "Теоретическое и экспериментальное изучение плазмы и межпланетного магнитного поля, исследование энергичных частиц и волновых процессов." %}</div>
+                <div><ul>
+                    <li>{% trans "Солнце и Гелиосфера" %}</li>
+                    <li>{% trans "Солнечный ветер и космическая погода" %}</li>
+                    <li>{% trans "Волновые явления в плазме" %}</li>
+                    <li>{% trans "Солнечные и Галактические космические лучи" %}</li>
+                    <li>{% trans "Магнитосферы и ионосферы планет Солнечной системы" %}</li>
+                </ul></div>
+            </div>
+            <div id="theme-more-1" data-other="theme-less-1" class="theme-more"  data-id="theme-1" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-1" data-other="theme-more-1" hidden class="theme-more" data-id="theme-1" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+            </div>
+
+            <div class="theme-container">
+            <div id="theme-2" class=" theme-container-partial">
+                <div class="dark-subsection-title">{% trans "Астрофизика и радиоастрономия" %}</div>
+                <div class="paragraph">{% trans "Астрофизика высоких энергий (рентгеновское и гамма излучение) и радиоволновая Вселенная" %}</div>
+                <div><ul>
+                    <li>{% trans "Сверхмассивные черные дыры и аккреция вещества" %}</li>
+                    <li>{% trans "Нейтронные звезды и кратные системы" %}</li>
+                    <li>{% trans "Скопления галактик" %}</li>
+                    <li>{% trans "Крупномасштабные структуры и космология" %}</li>
+                    <li>{% trans "Радиогалактики и реликтовое излучение" %}</li>
+                </ul></div>
+            </div>
+            <div id="theme-more-2" data-other="theme-less-2" class="theme-more"  data-id="theme-2" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-2" data-other="theme-more-2" hidden class="theme-more" data-id="theme-2" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+            </div>
+
+
+    </div>
+    <div class="theme-split">
+            <div class="theme-container">
+            <div id="theme-3" class=" theme-container-partial">
+                <div class="dark-subsection-title">{% trans "Дистанционное зондирование Земли" %}</div>
+                <div class="paragraph">{% trans "Бортовая аппаратура космических систем дистанционного зондирования Земли, методы и алгоритмы обработки спутниковых данных, организация доступа к данным через геоинформационные системы." %}</div>
+                <div><ul>
+                    <li>{% trans "Атмосферные и климатические процессы" %}</li>
+                    <li>{% trans "Водные объекты и гидрология суши" %}</li>
+                    <li>{% trans "Растительные и почвенные покровы" %}</li>
+                    <li>{% trans "Ионосферные процессы" %}</li>
+                    <li>{% trans "Криогенные образования" %}</li>
+                </ul></div>
+            </div>
+            <div id="theme-more-3" data-other="theme-less-3" class="theme-more"  data-id="theme-3" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-3" data-other="theme-more-3" hidden class="theme-more" data-id="theme-3" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+            </div>
+
+            <div class="theme-container">
+            <div id="theme-4" class=" theme-container-partial">
+                <div class="dark-subsection-title">{% trans "Исследование планет" %}</div>
+                <div class="paragraph">{% trans "Современные исследования планет, их спутников и малых тел Солнечной системы, а также экзопланет" %}</div>
+                <div><ul>
+                    <li>{% trans "Атмосферы и экзосферы планет" %}</li>
+                    <li>{% trans "Исследования поверхности и внутреннего строения небесных тел" %}</li>
+                    <li>{% trans "Моделирование физических процессов" %}</li>
+                    <li>{% trans "Методы обработки и интерпретация наблюдательных данных" %}</li>
+                    <li>{% trans "Небесная механика и баллистика" %}</li>
+                    <li>{% trans "Экзопланеты и сравнительная планетология" %}</li>
+                </ul></div>
+            </div>
+            <div id="theme-more-4" data-other="theme-less-4" class="theme-more"  data-id="theme-4" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-4" data-other="theme-more-4" hidden class="theme-more" data-id="theme-4" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+            </div>
+    </div>
+    <div class="theme-split">
+            <div class="theme-container">
+            <div id="theme-5" class=" theme-container-partial">
+                <div class="dark-subsection-title">{% trans "Теория и моделирование физических процессов" %}</div>
+                <div class="paragraph">{% trans "Теория и моделирование в физике космической плазмы, астрофизике и баллистике." %}</div>
+                <div><ul>
+                    <li>{% trans "Плазменные неустойчивости" %}</li>
+                    <li>{% trans "Неустойчивости в токовых слоях, волновые процессы" %}</li>
+                    <li>{% trans "Аккреция вещества на массивные объекты, излучение" %}</li>
+                    <li>{% trans "Высокоэнергичные частицы в космосе" %}</li>
+                    <li>{% trans "Проблемы взаимодействия спутников с космической плазмой и т. п." %}</li>
+                </ul></div>
+            </div>
+            <div id="theme-more-5" data-other="theme-less-5" class="theme-more"  data-id="theme-5" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-5" data-other="theme-more-5" hidden class="theme-more" data-id="theme-5" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+            </div>
+
+            <div class="theme-container">
+            <div id="theme-6" class=" theme-container-partial">
+                <div class="dark-subsection-title">{% trans "Космическое приборостроение и эксперимент" %}</div>
+                <div class="paragraph">{% trans "Секция охватывает широкий спектр тем, связанных с разработкой, эксплуатацией и испытаниями аппаратуры космического назначения" %}</div>
+                <div><ul>
+                    <li>{% trans "Разработка приборов и датчиков космических аппаратов" %}</li>
+                    <li>{% trans "Методы экспериментальной физики в космических исследованиях" %}</li>
+                    <li>{% trans "Перспективные технологии и электрорадиоизделия (ЭРИ) в приборостроении" %}</li>
+                    <li>{% trans "Анализ данных, полученных в ходе космических экспериментов" %}</li>
+                    <li>{% trans "Наземная экспериментальная отработка и испытания аппаратуры космического назначения" %}</li>
+                </ul></div>
+            </div>
+            <div id="theme-more-6" data-other="theme-less-6" class="theme-more"  data-id="theme-6" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-6" data-other="theme-more-6" hidden class="theme-more" data-id="theme-6" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+            </div>
+
+    </div>
+    <div class="theme-split">
+        <div class="theme-container">
+            <div id="theme-10" class="theme-container-partial">
+                <div class="dark-subsection-title">{% trans "Космос в социальных науках и мировой политике" %}</div>
+                <div><ul>
+                    <li>{% trans "Влияние космических исследований на общество, культуру и экономику" %}</li>
+                    <li>{% trans "Социальные и этические аспекты освоения космоса" %}</li>
+                    <li>{% trans "Политические и правовые аспекты космической деятельности, обеспечение международной космической безопасности" %}</li>
+                    <li>{% trans "Соперничество и сотрудничество в исследовании космического пространства" %}</li>
+                    <li>{% trans "Правовое регулирование космической деятельности" %}</li>
+                    <li>{% trans "Политико-правовые аспекты освоения ресурсов небесных тел" %}</li>
+                    <li>{% trans "Вызовы и угрозы международной космической безопасности" %}</li>
+                </ul></div>
+            </div>
+            <div id="theme-more-10" data-other="theme-less-10" class="theme-more"  data-id="theme-10" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-10" data-other="theme-more-10" hidden class="theme-more" data-id="theme-10" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+        </div>
+
+
+            <div class="theme-container">
+            <div id="theme-7" class=" theme-container-partial">
+                <div class="dark-subsection-title">{% trans "Доклады юниоров (9-11 классы)" %}</div>
+                <div class="paragraph">{% blocktrans %}Секция ориентирована на учащихся 9-11 классов, проявляющих интерес к космической науке и технике. Её цель - дать участникам опыт научной работы, публичного выступления и обратную связь от специалистов. Приветствуется наличие макета, эксперимента, программы или анализа реальных данных. Рабочий язык секции - русский.{% endblocktrans %}</div>
+                <div><ul>
+                    <li>{% trans "Космические аппараты и робототехника" %}</li>
+                    <li>{% trans "Физика и астрономия" %}</li>
+                    <li>{% trans "Космические технологии и материалы" %}</li>
+                    <li>{% trans "Математическое моделирование" %}</li>
+                    <li>{% trans "Обработка космических данных" %}</li>
+                </ul></div>
+            </div>
+            <div id="theme-more-7" data-other="theme-less-7" class="theme-more"  data-id="theme-7" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-7" data-other="theme-more-7" hidden class="theme-more" data-id="theme-7" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+            </div>
+
+
+    </div>
+
+</div>
+
+<div class="section-container">
+    <div class="subsection-title">{% trans "организатор конференции" %}</div>
+    <div class="paragraph-b two-thirds">{% blocktrans %}Конференцию организует Научно-образовательный центр ИКИ РАН, который активно занимается поддержкой молодых учёных и продвижением научных исследований в области космических наук.{% endblocktrans %}</div>
+</div>
+
+
+<div class="section-container">
+    <div class="section-title">{% trans "комитеты" %}</div>
+
+    <div id="committee-split">
+        <div class="committee-container">
+        <div id="theme-8" class=" theme-container-partial">
+            <div class="sub-title">{% trans "программный комитет конференции" %}</div>
+            <ul>
+                <li>{% trans "Зеленый Лев Матвеевич" %},</li>
+                <div>{% trans "д.ф.м.н., академик РАН, ИКИ РАН" %} — {% trans "председатель" %}</div>
+                <li>{% trans "Садовский Андрей Михайлович" %},</li>
+                <div>{% trans "к.ф.м.н., ИКИ РАН" %} — {% trans "зам. председателя" %}</div>
+                <li>{% trans "Барталев Сергей Александрович" %},</li>
+                <div>{% trans "д.т.н., ИКИ РАН" %}</div>
+                <li>{% trans "Беляев Денис Анатольевич" %},</li>
+                <div>{% trans "к.ф.м.н., ИКИ РАН" %}</div>
+                <li>{% trans "Бескин Василий Семенович" %},</li>
+                <div>{% trans "д.ф.м.н., ФИАН" %}</div>
+                <li>{% trans "Бессонов Роман Валерьевич" %},</li>
+                <div>{% trans "д.т.н., ИКИ РАН" %}</div>
+                <li>{% trans "Зимовец Иван Викторович" %},</li>
+                <div>{% trans "к.ф.м.н., ИКИ РАН" %}</div>
+                <li>{% trans "Измоденов Владислав Валерьевич" %},</li>
+                <div>{% trans "д.ф.м.н., МГУ им. Ломоносова" %}</div>
+                <li>{% trans "Лутовинов Александр Анатольевич" %},</li>
+                <div>{% trans "д.ф.м.н., чл.-корр. РАН, ИКИ РАН" %}</div>
+                <li>{% trans "Петрукович Анатолий Алексеевич" %},</li>
+                <div>{% trans "д.ф.м.н., академик РАН, ИКИ РАН" %}</div>
+                <li>{% trans "Уваров Валентин Борисович" %},</li>
+                <div>{% trans "АНО" %} "{% trans "КЭП" %}"</div>
+                <li>{% trans "Чулков Илья Владиленович" %},</li>
+                <div>{% trans "ИКИ РАН" %}</div>
+                <li>{% trans "Шишкин Дмитрий Александрович" %},</li>
+                <div>{% trans "МГТУ им. Н.Э. Баумана" %}</div>
+            </ul>
+        </div>
+            <div id="theme-more-8" data-other="theme-less-8" class="theme-more"  data-id="theme-8" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-8" data-other="theme-more-8" hidden class="theme-more" data-id="theme-8" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+        </div>
+        <div class="committee-container">
+            <div id="theme-9" class=" theme-container-partial">
+            <div class="sub-title">{% trans "организационный комитет конференции" %}</div>
+            <ul>
+                <li>{% trans "Садовский Андрей Михайлович" %},</li>
+                <div>{% trans "к.ф.-м.н., ИКИ РАН" %} — {% trans "председатель" %}</div>
+                <li>{% trans "Кобец Дмитрий Александрович" %},</li>
+                <div>{% trans "к.т.н., ИКИ РАН" %} – {% trans "зам. председателя" %}</div>
+                <li>{% trans "Бельведерский Михаил Игоревич" %}</li>
+                <div>{% trans "м.н.с., ИКИ РАН" %} – {% trans "зам. председателя" %}</div>
+                <li>{% trans "Нежина Александра Сергеевна" %}</li>
+                <li>{% trans "Боярский Михаил Николаевич" %}</li>
+                <li>{% trans "Евдокимова Дарья Геннадьевна" %},</li>
+                <div>{% trans "к.ф.-м.н." %}</div>
+                <li>{% trans "Закутняя Ольга Валерьевна" %},</li>
+                <div>{% trans "к.ф.н." %}</div>
+                <li>{% trans "Кузнецов Илья Александрович" %}</li>
+                <li>{% trans "Кучуков Артур Вадимович" %}</li>
+                <li>{% trans "Ломакин Александр Александрович" %}</li>
+                <li>{% trans "Матюхин Андрей Андреевич" %}</li>
+                <li>{% trans "Нечаева Алёна Борисовна" %}</li>
+                <li>{% trans "Прохоренко Сергей Александрович" %}</li>
+                <li>{% trans "Сапунова Ольга Владимировна" %}</li>
+                <li>{% trans "Синевич Александр Алексеевич" %}</li>
+                <li>{% trans "Шиханова Мария Андреевна" %}</li>
+                <li>{% trans "Яковлев Владислав Александрович" %}</li>
+            </ul>
+        </div>
+            <div id="theme-more-9" data-other="theme-less-9" class="theme-more"  data-id="theme-9" onclick="themeDisplay(this);">{% trans "Подробнее" %}</div>
+            <div id="theme-less-9" data-other="theme-more-9" hidden class="theme-more" data-id="theme-9" onclick="themeDisplay(this);">{% trans "Скрыть" %}</div>
+    </div>
+    </div>
+
+</div>
+
+{% include "conference/contacts.html"  %}
+
+{% endblock %}

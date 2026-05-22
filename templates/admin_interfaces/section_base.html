@@ -1,0 +1,22 @@
+{% extends 'admin_interfaces/admin_main.html' %}
+
+{% load static %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'users/profile_forms.css' %}?v={{ static_version }}"/>
+{% endblock %}
+
+{% block page %}
+
+    <div id="admin-level-3">
+        <a href="{% url 'subsection_list' %}"><div class="nav-item {% if 'subsection' in request.path %}dark-nav-item{% endif %} ">Подсекции</div></a>
+        <div class="wvl">&nbsp;</div>
+        <a href="{% url 'broadcast_section_list' %}"><div class="nav-item {% if 'broadcast' in request.path %}dark-nav-item{% endif %}">ВКС</div></a>
+        
+    </div>
+
+    {% block subpage %}
+
+    {% endblock %}
+
+{% endblock %}

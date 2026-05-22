@@ -1,0 +1,90 @@
+.public-page-container {
+    min-height: 90vh;
+    height: fit-content;
+}
+
+.page-split {
+    padding-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem 4rem;
+    justify-content: center;
+    margin-bottom: 4rem;
+}
+
+
+.other-info {
+    min-width: 360px;
+}
+
+.page-part div {
+    font-family: "Roboto", sans-serif;
+}
+
+.medium-title {
+    color: var(--medium-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.abstract {
+    font-size: 1rem;
+    line-height: 1.7rem;
+}
+
+.gvl {
+    border: 1px solid #eee;
+}
+
+.info-label {
+    color: #bbb;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.info-value {
+    color: var(--dark-color);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
+ .info-value div,
+ .info-value span{
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.pt-1 {
+    padding-top: 0.5rem;
+}
+
+.declined {
+    color: var(--font-color);
+    font-size: 0.8rem;
+    font-family: "Roboto", sans-serif;
+    padding: 0.3rem;
+    text-align: center;
+    max-width: 200px;
+    border: 1px solid var(--font-color);
+    border-radius: 3px;
+    margin-bottom: 2rem;
+    background-color: #eee;
+    text-transform: uppercase; 
+}
+
+
+@media (max-width: 1000px) {
+    
+    .page-split {
+        flex-direction: column;
+    }
+}
+
+
+

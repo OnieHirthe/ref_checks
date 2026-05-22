@@ -1,0 +1,53 @@
+#other-header-container {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(to right, #17132c, #1a1636);
+    z-index: -10;
+}
+
+#other-header-title {
+    position: relative;
+    z-index: -5;
+    text-transform: uppercase;
+    font-family: 'PlayfairDisplay', serif;
+    font-weight: 700;
+    color: var(--white-color);
+    text-align: center;
+}
+
+.ohds-evenly,
+.ohds-2 {
+    position: relative;
+    z-index: -5;
+    margin: auto;
+    display: flex;
+}
+
+.ohds-evenly {
+    justify-content: space-evenly;
+}
+
+.ohds-2 {
+    justify-content: center;
+    gap: 1rem 10rem;
+
+}
+
+
+.ohds-evenly div,
+.ohds-2 div {
+    color: var(--white-color);
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+
+}
+
+.other-header-date {
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+
+
+

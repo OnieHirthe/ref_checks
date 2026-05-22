@@ -1,0 +1,279 @@
+{% extends 'admin_interfaces/admin_main.html' %}
+
+{% load static %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'users/profile_forms.css' %}?v={{ static_version }}"/>
+    <link rel="stylesheet" href="{% static 'admin_interfaces/admin_chat.css' %}?v={{ static_version }}"/>
+{% endblock %}
+
+{% block page %}
+
+
+<a href="{% url 'report_list' %}"><div class=" split" >
+    <div><img src="{% static 'conference/assets/humbleicons_arrow-go-back.svg' %}?v={{ static_version }}"></div>
+    <div class="split-text">К списку докладов</div>
+</div></a>
+
+<div class="page-split">
+<div class="page-section">
+
+<div class="report-header">
+    {% if report.status == "accepted" %}
+        {% if report.plenary %}
+    <div class="rh-status plenary"><div><img src="{% static 'conference/assets/accepted_check.svg' %}?v={{ static_version }}"></div><div>Пленарный</div></div>
+        {% else %}
+    <div class="rh-status accepted"><div><img src="{% static 'conference/assets/accepted_check.svg' %}?v={{ static_version }}"></div><div>Принят</div></div>
+        {% endif %}
+    {% elif report.status == "declined" %}
+    <div class="rh-status declined"><div><img src="{% static 'conference/assets/declined.svg' %}?v={{ static_version }}"></div><div>Отклонен</div></div>
+    {% else %}
+    <div class="rh-status in-review"><div><img src="{% static 'conference/assets/jam_search.svg' %}?v={{ static_version }}"></div><div>На рассмотрении</div></div>
+    {% endif %}
+    <div class="">СТАТУС ДОКЛАДА СРАЗУ ВИДЕН В ЛК УЧАСТНИКА</div>
+</div>
+
+
+<div id="report-title">
+    <div class="report-title" hx-trigger="click" hx-get="{% url 'admin_report_title_form' report.id %}" hx-target="#report-title" >{{ report.title }}</div>
+</div>
+
+<div class="field-container">
+    <div class="label-split">
+        <div class="form-label">аннотация</div>
+        <div class="author-vl">&nbsp;</div>
+        <div class="clickable-icon"  hx-trigger="click" hx-target="#report-abstract" hx-swap="innerHTML" hx-get="{% url 'admin_report_abstract_form' report.id %}">
+            <img src="{% static 'conference/assets/bx_edit.svg' %}?v={{ static_version }}" />
+        </div>
+    </div>
+    <div id="report-abstract" class="field-value">{{ report.abstract }}</div>
+</div>
+
+
+<div class="profile-gl"></div>
+
+
+     <div class="field-container">
+        <div class="field-label">автор</div>
+        <div class="field-value">
+            <div class="author-name">
+            {% if report.lang == 'ru' %}
+                <div>{{ report.profile.full_rus_name }}</div>
+            {% endif %}
+            {% if report.lang == 'en' %}
+                <div>{{ report.profile.full_en_name }}</div>
+            {% endif %}
+            </div>
+   
+            <div class="author-split"> 
+            <div class="split">
+                <div class="">{{ report.profile.user.email }}</div>
+                {% if report.profile.phone %}
+                    <div class="author-vl">&nbsp;</div>
+                    <div class="">{{ report.profile.phone }}</div>
+                {% endif %}
+            </div>
+            </div>
+            <div class="author-split">
+                <div>
+                {% if report.lang == 'ru' %}
+                    <div>{{ report.profile.position_ru }}</div>
+                {% endif %}
+                {% if report.lang == 'en' %}
+                    <div>{{ report.profile.position_en }}</div>
+                {% endif %}
+
+                </div>
+            </div>
+            <div class="author-split">
+                <div>
+                {% if report.lang == 'ru' %}
+                    <div>{{ report.profile.org_ru }}</div>
+                {% endif %}
+                {% if report.lang == 'en' %}
+                    <div>{{ report.profile.org_en }}</div>
+                {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+     </div>
+
+<div class="profile-gl"></div>
+<div class="fields-split">
+
+
+     <div class="field-container">
+        <div class="field-label">научный руководитель</div>
+        <div id="report-advisor-target" hx-get="{% url 'admin_report_has_advisor' report.id %}" hx-trigger="load" hx-target="#report-advisor-target" hx-swap="outerHTML"></div>
+        {% if report.advisor  %}
+            <div id="advisor-target" {% if report.has_advisor %}{% else %}hidden{% endif %} hx-get="{% url 'advisor_endpoint' report.advisor.id  %}" hx-trigger="load" hx-target="#advisor-target" hx-swap="innerHTML" ></div>
+            {% else %}
+            <div id="advisor-target" {% if report.has_advisor %}{% else %}hidden{% endif %}  hx-get="{% url 'advisor_endpoint_form' %}" hx-trigger="load" hx-target="#advisor-target" hx-swap="innerHTML" ></div>
+
+        {% endif %}
+     </div>
+
+
+    <div class="field-container">
+        <div class="field-label">соавторы</div>
+        <div id="report-author-attach" hx-trigger="load" hx-target="#report-author-attach" hx-swap="outerHTML" hx-get="{% url 'admin_report_attach_authors' report.id %}"></div>
+        <div id="all-authors-container">
+        <!-- here iterate over all authors-->
+        {% for author in report.authors_only %}
+            <div id="tbs-author-{{ author.id }}" hx-get={% url 'author_endpoint' author.id %} hx-swap="outerHTML" hx-target="#tbs-author-{{ author.id }}" hx-trigger="load"></div>
+        {% endfor %}
+        </div>
+        <div class="profile-smaller-medium-button" hx-get="{% url 'author_endpoint_form' %}" hx-trigger="click" hx-target="#all-authors-container" hx-swap="beforeend">Добавить coавтора</div>
+
+    </div>
+
+</div>
+
+<div class="profile-gl"></div>
+
+<div class="fields-split">
+     <div class="field-container">
+     
+        <div class="label-split">
+            <div class="form-label">язык</div>
+            <div class="author-vl">&nbsp;</div>
+            <div class="clickable-icon" hx-trigger="click" hx-target="#report-lang" hx-swap="innerHTML" hx-get="{% url 'admin_report_lang_form' report.id %}">
+                <img src="{% static 'conference/assets/bx_edit.svg' %}?v={{ static_version }}" />
+            </div>
+        </div>
+        <div id="report-lang" class="field-value">{{ report.lang }}</div>
+
+     </div>
+     <div class="field-container">
+        <div class="label-split">
+            <div class="form-label">пленарный доклад</div>
+        </div>
+        <div id="report-plenary"class="field-value">{{ report.plenary }}</div>
+        
+     </div>
+</div>
+
+<div class="profile-gl"></div>
+
+<div class="fields-split">
+     <div class="field-container">
+     
+        <div class="label-split">
+            <div class="form-label">секция</div>
+            {% if report.plenary %} {% else %}
+            <div class="author-vl">&nbsp;</div>
+            <div class="clickable-icon" hx-trigger="click" hx-target="#report-section" hx-swap="innerHTML" hx-get="{% url 'report_attach_section_form' report.id %}">
+                <img src="{% static 'conference/assets/bx_edit.svg' %}?v={{ static_version }}" />
+            </div>
+            {% endif %}
+        </div>
+        <div id="report-section" class="field-value">{{ report.section.name_ru }}</div>
+
+
+     </div>
+     <div class="field-container">
+        <div class="label-split">
+            <div class="field-label">подсекция</div>
+            {% if report.plenary %} {% else %}
+            <div class="author-vl">&nbsp;</div>
+            <div class="clickable-icon" hx-trigger="click" hx-target="#report-subsection" hx-swap="innerHTML" hx-get="{% url 'report_attach_subsection_form' report.id %}">
+                <img src="{% static 'conference/assets/bx_edit.svg' %}?v={{ static_version }}" />
+            </div>
+            {% endif %}
+        </div>
+        <div id="report-subsection" class="field-value">{{ report.subsection.name_ru }}</div>
+     </div>
+</div>
+
+<div class="profile-gl"></div>
+
+<div class="field-container">
+    
+        <div class="label-split">
+            <div class="form-label">ссылка на публикацию</div>
+            <div class="author-vl">&nbsp;</div>
+            <div class="clickable-icon" hx-trigger="click" hx-target="#report-pub_link" hx-swap="innerHTML" hx-get="{% url 'admin_report_pub_link_form' report.id %}">
+                <img src="{% static 'conference/assets/bx_edit.svg' %}?v={{ static_version }}" />
+            </div>
+        </div>
+        <div id="report-pub_link" class="field-value">{{ report.pub_link }}</div>
+
+
+</div>
+
+<div class="profile-gl"></div>
+
+<div class="fields-split">
+     <div class="field-container ">
+        <div class="field-label">экспертное заключение</div>
+        <div id="report-{{ report.id }}-expertise-target">
+            {% with file_instance=report.get_expertise %}
+            {% if file_instance %}
+                <div hx-get={% url 'handle_file' report.id file_instance.model_name file_instance.id %} hx-trigger="load">file exists</div>
+            {% else %}
+                <div class="file-form-split">
+                    <div class="smaller-button-split" hx-get="{% url 'handle_file' report.id 'expertise'  %}" hx-target="#report-{{ report.id }}-expertise-target" hx-swap="innerHTML">
+                        <div><img src="{% static 'conference/assets/prime_upload.svg' %}?v={{ static_version }}"></div>
+                        <div>Загрузить заключение</div>
+                    </div>
+                </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+
+     </div>
+
+
+     <div class="field-container">
+        <div class="field-label">файл презентации</div>
+
+        <div id="report-{{ report.id }}-presentation-target">
+        {% with file_instance=report.get_presentation %}
+        {% if file_instance %}
+            <div hx-get={% url 'handle_file' report.id file_instance.model_name file_instance.id %} hx-trigger="load">file exists</div>
+        {% else %}
+            <div class="file-form-split">
+                <div class="smaller-button-split" hx-get="{% url 'handle_file' report.id 'presentation'  %}" hx-target="#report-{{ report.id }}-presentation-target" hx-swap="innerHTML">
+                    <div><img src="{% static 'conference/assets/prime_upload.svg' %}?v={{ static_version }}"></div>
+                    <div>Прикрепить презентацию</div>
+                </div>
+            </div>
+        {% endif %}
+        {% endwith %}
+
+    </div>
+
+    </div> 
+</div>
+
+
+<div class="profile-gl"></div>
+
+<div class="split-middle">
+    <div class="split">
+        {% if report.status != "accepted" %}<a href="{% url 'report_status_accept' report.id %}"><div class="dark-button accepted">принять</div></a>{% endif %}
+        {% if report.status != "declined" %}<a href="{% url 'report_status_decline' report.id %}"><div class="dark-button declined">отклонить</div></a>{% endif %}
+        {% if report.status != "in review" %}<a href="{% url 'report_status_review' report.id %}"><div class="dark-button in-review">на рассмотрение</div></a>{% endif %}
+    </div>
+</div>
+
+</div>
+<div class="chat">
+    <div id="chat-target" class="chat-space" hx-get="{% url 'report_chat' report.id %}" hx-trigger="load" hx-swap="innerHTML">
+    </div>
+    <div class="dark-button" hx-get="{% url 'report_chat_form' report.id %}" hx-target="#chat-target" hx-swap="innerHTML">новый комментарий</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block page_js %}
+
+<script src="{% static 'users/profile_forms.js' %}?v={{ static_version }}"></script>
+
+{% endblock %}
+
+

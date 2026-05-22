@@ -1,0 +1,41 @@
+:root {
+    --darkest-color: #17132c;
+    --dark-color: #22183C;
+    --medium-color: #584098;
+    --light-color: #F1E7FB;
+    --shadow-color: #58409833;
+    
+    --font-color: #333333;
+    
+    --white-color: #ffffff;
+    --gray-color: #BABABA;
+    --light-gray-color: #D7D7D7;
+    --red-color: #E13D41;
+
+
+    --lm: 10%;
+} 
+
+@media (min-width: 1750px) {
+    :root {
+        --lm: 15%;
+    }
+}
+
+@media (min-width: 2000px) {
+    :root {
+        --lm: 20%;
+    }
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+a {
+    color: inherit;
+}
+

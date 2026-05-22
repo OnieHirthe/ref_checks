@@ -1,0 +1,15 @@
+
+{% if form %}
+    <div class="field-container">
+    <form hx-post={% url url_name report.id %} hx-trigger="click from:#submit-{{ field }}" hx-target="#report-title" >
+        {% csrf_token %}
+        {{ form }}
+        <div class="split">
+            <p class="form-button" id="submit-{{ field }}">сохранить</p>
+            <p class="form-button-light" hx-get="{% url 'admin_report_title' report.id %}" hx-trigger="click" hx-target="#report-title" >отменить</p>
+        </div>
+    </form>
+    </div>
+{% else %}
+    <div class="report-title" hx-trigger="click" hx-get="{% url 'admin_report_title_form' report.id %}" hx-target="#report-title" >{{ report.title }}</div>
+{% endif %}

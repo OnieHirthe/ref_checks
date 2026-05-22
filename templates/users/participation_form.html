@@ -1,0 +1,92 @@
+{% load i18n %}
+
+{% if participation_instance  %}
+
+<div class="green-highlight">{% trans 'Вы успешно зарегистрированы на конференцию!' %}</div>
+
+<div class="profile-split-1">
+    <div>
+        <div>{% trans 'Дата проведения' %}</div>
+        <div class="p-medium-highlight">{% trans '22-24 апреля 2026' %}</div>
+    </div>
+    <div>
+        <div>{% trans 'Место проведения' %}</div>
+        <div class="p-medium-highlight">{% trans 'ИКИ РАН, Москва, Россия' %}</div>
+    </div>
+</div>
+
+<div class="field-container">
+    <div class="field-label">{% trans 'Форма участия' %}</div>
+    <div class="field-value">{% if participation_instance.online %}{% trans 'Онлайн' %}{% else %}{% trans 'Очная' %}{% endif %}</div>
+</div>
+
+{% if flags.REGISTRATION %}
+<div id="confirm-cancel-participation" class="confirm-shade" hidden >
+<div class="confirm-container">
+    <div class="confirm-prompt">{% trans "Отменить регистрацию?" %}</div>
+    <div class="confirm-split">
+        <div class="confirm-option" data-url="{% url 'delete_participation' %}" data-target="#participation-form-target" hx-trigger-"click" data-swap="innerHTML" onclick="unregisterAnd(this);">{% trans "да" %}</div>
+        <div class="deny-option" onclick="hide('confirm-cancel-participation');" >{% trans "нет" %}</div>
+    </div>
+</div>
+</div>
+
+<div class="fields-split">
+    <div class="profile-active-button" hx-get="{% url 'participation_endpoint_form' %}" hx-target="#participation-form-target" hx-trigger="click" hx-swap="innerHTML">{% trans 'Редактировать' %}</div>
+    <div class="profile-inactive-button" onclick="show('confirm-cancel-participation');">{% trans 'Отменить участие' %}</div>
+</div>
+{% endif %}
+
+
+
+{% else %}
+
+{% if forbidden %}
+
+<div class="p-reg-text">{% trans 'Пожалуйста, заполните Личные данные прежде, чем зарегистрироваться на конференцию.' %}</div>
+
+{% else %}
+
+    {% if participation_form.instance.exists %}
+        <div class="green-highlight">{% trans 'Вы успешно зарегистрированы на конференцию!' %}</div>
+    {% endif %}
+
+<div class="profile-split-1">
+    <div>
+        <div>{% trans 'Дата проведения' %}</div>
+        <div class="p-medium-highlight">{% trans '22-24 апреля 2026' %}</div>
+    </div>
+    <div>
+        <div>{% trans 'Место проведения' %}</div>
+        <div class="p-medium-highlight">{% trans 'ИКИ РАН, Москва, Россия' %}</div>
+    </div>
+</div>
+
+{% if flags.REGISTRATION %}
+<form id="participation-form" autocomplete="off" data-url="{% url 'participation_endpoint' %}" data-target="#participation-form-target" data-swap="innerHTML">
+
+    {% csrf_token %}
+
+
+<div class="field-container">
+    <div class="field-label">{{ participation_form.online.label }}*</div>
+    <div>{{ participation_form.online }}</div>
+    <div class="field-error">{{ participation_form.online.errors.as_text }}</div>
+</div>
+
+<div class="field-container field-error">{{ participation_form.non_field_errors.as_text }}</div>
+
+{% if participation_form.instance.exists %}
+<div id="participation-form-button" class="profile-active-button" data-form_id="participation-form" data-then_url="{%  url 'reports_endpoint' %}" onclick="registerAnd(this);">{% trans 'Сохранить' %}</div>
+{% else %}
+<div id="participation-form-button" class="profile-green-button" data-form_id="participation-form" data-then_url="{%  url 'reports_endpoint' %}" onclick="registerAnd(this);">{% trans 'Зарегистрироваться' %}</div>
+{% endif %}
+</form>
+{% else %}
+
+{% endif %}
+
+
+{% endif %}
+
+{% endif %}

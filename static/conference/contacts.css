@@ -1,0 +1,69 @@
+.map-split {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 5rem;
+    font-size: 1.1rem;
+}
+
+.map-split div {
+    font-family: 'Roboto', sans-serif;
+    color: var(--font-color);
+}
+
+.map-split .img-container {
+    margin-bottom: 3rem;
+}
+
+hr {
+    color: var(--light-gray-color);
+    background-color: var(--light-gray-color);
+    height: 2px;
+    border: none;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-label {
+    color: var(--dark-color);
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.contact-label-split {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: start;
+}
+
+
+.directions-split {
+    display: flex;
+    gap: 0 3rem;
+
+    background-color: #f5f5f5;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+
+}
+
+.directions-split div {
+    flex: 1;
+}
+
+.map-container {
+    overflow: hidden;
+    border: 1px solid var(--dark-color);
+    border-radius: 10px;
+}
+
+#iki-contacts {
+    width: 180px;
+}
+
+#contacts .section-title{
+    padding-top: 65px;
+}

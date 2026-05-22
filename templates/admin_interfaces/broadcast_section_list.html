@@ -1,0 +1,20 @@
+{% extends 'admin_interfaces/section_base.html' %}
+
+{% load static %}
+
+{% block subpage %}
+
+    <div class="page-title">Ссылки для онлайн-участия</div>
+   
+    <div>
+    {% for section in sections %}
+    <div class="section-title">{{ section.name_ru }} ({{ section.name_en }})</div>
+    <div id="sub-container-{{ section.id }}" class="sub-container">
+    
+        <div hx-get="{% url 'handle_section_broadcast' section.id  %}" hx-trigger="load" hx-swap="outerHTML"></div>
+
+    </div>
+    {% endfor %}
+    </div>
+    
+{% endblock %}

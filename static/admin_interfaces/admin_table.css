@@ -1,0 +1,33 @@
+
+table {
+    border-collapse: collapse;
+    
+}
+
+
+th {
+    border: 2px solid var(--dark-color);
+    background-color: var(--medium-color);
+    color: var(--white-color);
+    font-weight: 600;
+}
+
+td {
+    border: 2px solid #eee;
+}
+
+th,
+td
+{
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    padding: 0.5rem;
+    text-align: start;
+}
+
+th div,
+td div
+{
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+}

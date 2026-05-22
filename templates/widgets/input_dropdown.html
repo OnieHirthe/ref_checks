@@ -1,0 +1,41 @@
+<div id="input-dropdown-options">
+{% for group_name, group_choices, group_index in widget.optgroups %}
+{% for option in group_choices %}
+    <div data-target="{{ widget.attrs.id }}-input" data-value="{{ option.value }}" onclick="setOption(this);" class="input-dropdown-option">{{ option.label }}</div>
+{% endfor %}
+{% endfor %}
+</div>
+
+<select hidden data-input="{{ widget.attrs.id }}-input" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>{% for group_name, group_choices, group_index in widget.optgroups %}{% if group_name %}
+    <optgroup label="{{ group_name }}">{% endif %}{% for option in group_choices %}
+    {% include option.template_name with widget=option %}{% endfor %}{% if group_name %}
+    </optgroup>{% endif %}{% endfor %}
+</select>
+
+<script>
+    function setInitial(elId) {
+        console.log("launched");
+        let el = document.getElementById(elId);
+        let inputElement = document.getElementById(el.dataset.input);
+        if (el.dataset.query) {
+        inputElement.value = el.dataset.query;
+        } else {
+        inputElement.value = '';
+        }
+    }
+
+    function optionsVisibility() {
+        let el = document.getElementById("input-dropdown-options");
+        el.hidden = !el.hidden;
+    }
+
+    function setOption(optionEl) {
+        let inputEl = document.getElementById(optionEl.dataset.target);
+        inputEl.value = optionEl.innerHTML;
+        let selectEl = document.getElementById("{{ widget.attrs.id }}");
+        selectEl.value = optionEl.dataset.value;
+        optionsVisibility();
+    }
+
+    setInitial('{{ widget.attrs.id }}');
+</script>

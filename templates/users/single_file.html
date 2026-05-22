@@ -1,0 +1,34 @@
+{% load static %}
+{% load i18n %}
+
+
+{% if file_instance %}
+
+<div class="file-form-split">
+    <div id="confirm-del-{{ report.id }}-{{ model }}" class="confirm-shade" hidden >
+    <div class="confirm-container">
+        <div class="confirm-prompt">{% trans "Удалить файл?" %}</div>
+        <div class="confirm-split">
+            <div class="confirm-option" hx-get="{% url 'delete_file' file_instance.model_name file_instance.id  %}" hx-target="#report-{{ report.id }}-{{ model }}-target" >{% trans "да" %}</div>
+            <div class="deny-option" onclick="hide('confirm-del-{{ report.id }}-{{ model }}');" >{% trans "нет" %}</div>
+        </div>
+    </div>
+    </div>
+
+
+{% if model == 'expertise' %}<div class="rh-status accepted"><div>{% trans "Загружено" %}</div></div>{% endif %}
+    <div class="file-name"><a href="{% url 'display_file' file_instance.model_name file_instance.id  %}">{{ file_instance.filename }}</a></div>
+    <div class="file-del" onclick="show('confirm-del-{{ report.id }}-{{ model }}');"><img src="{% static 'conference/assets/mingcute_delete-line.svg' %}?v={{ static_version }}" /></div>
+</div>
+{% else %}
+<div class="file-form-split">
+    <form enctype="multipart/form-data" hx-post="{% url 'handle_file' report.id model %}" hx-target="#report-{{ report.id }}-{{ model }}-target" hx-trigger="click from:#submit-{{ model }}-{{ report.id }}">
+        {% csrf_token %}
+        <div class="field-file">
+        {{ file_form.single_file }}
+        <div class="field-error">{{ file_form.single_file.errors.as_text }}</div>
+        </div>
+        <button id="submit-{{ model }}-{{ report.id }}" class="profile-smaller-button">{% trans "Сохранить" %}</button>
+    </form>
+</div>
+{% endif %}

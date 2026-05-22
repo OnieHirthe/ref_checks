@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>КМУ Админ </title>
+    <link rel="stylesheet" href="{% static 'conference/declarations.css' %}?v={{ static_version }}"/>
+    <link rel="stylesheet" href="{% static 'conference/fonts.css' %}?v={{ static_version }}"/>
+
+    <link rel="stylesheet" href="{% static 'admin_interfaces/admin_main.css' %}?v={{ static_version }}"/>
+    
+    <link rel="stylesheet" href="{% static 'admin_interfaces/admin_table.css' %}?v={{ static_version }}"/>
+    
+    <link rel="stylesheet" href="{% static 'conference/footer.css' %}?v={{ static_version }}"/>
+    <link rel="icon" type="image/png" href="{% static 'conference/favicon/favicon.ico' %}?v={{ static_version }}"/>
+
+    {% block page_css %}{% endblock %}
+
+</head>
+<body>
+
+    <div id="admin-navigation">
+        <div id="admin-level-1">
+            <div id="admin-title">Панель администратора</div>
+            <div id="admin-level-1-buttons">
+                <a href="{% url 'main_page_conference' %}"><div class="nav-item">
+                <img src="{% static "conference/assets/language.svg" %}?v={{ static_version }}" />
+                На главную КМУ</div></a>
+                <a href="{% url 'profile' %}"><div class="nav-item light-button">
+                <img src="{% static "conference/assets/mdi_account.svg" %}?v={{ static_version }}" />
+                Вернуться в ЛК</div></a>
+            </div>
+        </div>
+        <div id="admin-level-2">
+            <div class="select-button nav-item {% if 'participant_list' in request.path %}light-button{% endif %} ">
+                <a id="participant-list-link" 
+                {% if current_year %}
+                    href="{% url 'participant_list' current_year %}" 
+                {% else %}    
+                    href="{% url 'participant_list' years.0 %}" 
+                {% endif  %}
+                data-base_url="{% url 'participant_list' %}" >Участники</a> 
+                <select onchange="selectYearList(this);" data-target="participant-list-link">{% for year in years %}
+                    {% if current_year %}
+                    <option value="{{ year }}" {% if year == current_year %} selected {% endif %}>{{ year }}</option>
+                    {% else %}
+                    <option value="{{ year }}" {% if year == years.0 %} selected {% endif %}>{{ year }}</option>
+                    {% endif %}
+                {% endfor %}</select>
+            </div>
+            <div class="wvl">&nbsp;</div>
+            <div class="select-button nav-item {% if 'report_list' in request.path %}light-button{% endif %} ">
+                <a id="report-list-link" 
+                {% if current_year %}    
+                    href="{% url 'report_list' current_year %}" 
+                {% else %}
+                    href="{% url 'report_list' years.0 %}"
+                {% endif %}
+                data-base_url="{% url 'report_list' %}" >Доклады</a> 
+                <select onchange="selectYearList(this);" data-target="report-list-link">{% for year in years %}
+                    {% if current_year %}
+                    <option value="{{ year }}" {% if year == current_year %} selected {% endif %}>{{ year }}</option>
+                    {% else %}
+                    <option value="{{ year }}" {% if year == years.0 %} selected {% endif %}>{{ year }}</option>
+                    {% endif %}
+                {% endfor %}</select>
+            </div>
+            {% if request.user.is_admin %}
+            <div class="wvl">&nbsp;</div>
+            <a href="{% url 'subsection_list' %}"><div class="nav-item {% if 'section_list' in request.path %}light-button{% endif %} ">Секции</div></a>
+            <div class="wvl">&nbsp;</div>
+            <a href="{% url 'black_list' %}"><div class="nav-item {% if 'black_list' in request.path %}light-button{% endif %}">Черный список</div></a>
+
+            {% endif %}
+        </div>
+        
+    </div>
+
+
+    <div id="page-container">
+    {% block page %}{% endblock %}
+    </div>
+
+    {% include "conference/footer.html"  %}
+
+    <script src="{% static 'htmx.min.js' %}?v={{ static_version }}"></script>
+    <script src="{% static 'admin_interfaces/admin.js' %}?v={{ static_version }}"></script>
+    {% block page_js %}{% endblock %}
+</body>
+</html>
