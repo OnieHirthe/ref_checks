@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 def send_verification_email(user, html_link):
 
-    html_content = "<html><body><div>" + _("Перейдите по ссылке") + " <a href='" + html_link + "'>" + html_link + "}</a>" + _(", чтобы завершить регистрацию на сайте КМУ ") +"</div></body></html>"
+    html_content = "<html><body><div>" + _("Перейдите по ссылке") + " <a href='" + html_link + "'>" + html_link + "</a>" + _(", чтобы завершить регистрацию на сайте КМУ ") +"</div></body></html>"
 
     try:
         msg = mail.EmailMessage(_("КМУ ") + str(year()) + _(": Подтверждение регистрации на сайте"), html_content, from_email='kmu@cosmos.ru')
@@ -39,7 +39,7 @@ def issue_verification(user, request):
     
     # check for less then 24-hour links
     deadline = NOW() + dt.timedelta(hours=24)
-    links = user.auth_links.filter(created__lt=deadline)
+    links = user.auth_links.filter(created__gt=deadline)
 
     if links.count() == 1:
         # send email with it
@@ -60,7 +60,7 @@ def issue_code(user):
 
     # check for less then 24-hour links
     deadline = NOW() + dt.timedelta(hours=24)
-    codes = user.auth_codes.filter(created__lt=deadline)
+    codes = user.auth_codes.filter(created__gt=deadline)
 
     if codes.count() == 1:
         send_code = codes.first()
